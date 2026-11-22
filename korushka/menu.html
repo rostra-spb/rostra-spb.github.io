@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Меню — «Корюшка и сыр»</title>
+<meta name="description" content="Меню ресторана «Корюшка и сыр» на Петроградской: закуски, горячее, десерты и напитки с ценами.">
+<meta name="theme-color" content="#0B1410">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+@view-transition{navigation:auto}
+:root{--bg:#0B1410;--bg2:#13231A;--gold:#F2B66D;--cream:#F6F1E9;--muted:rgba(246,241,233,.74);--line:rgba(255,255,255,.12)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--cream);line-height:1.5;padding-bottom:96px}
+.top{padding:calc(22px + env(safe-area-inset-top)) 18px 18px;text-align:center;background:radial-gradient(circle at 50% 0,#24402F,var(--bg) 75%)}
+.top a.back{position:absolute;left:12px;top:calc(14px + env(safe-area-inset-top));width:44px;height:44px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line);color:var(--cream);text-decoration:none;font-size:18px}
+.top h1{font-family:"Playfair Display",Georgia,serif;font-size:28px;font-weight:600}
+.top h1 i{color:var(--gold);font-weight:500}
+.top p{color:var(--muted);font-size:13px;margin-top:4px}
+.live{display:inline-flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;font-weight:800;padding:6px 12px;border-radius:99px;border:1px solid var(--line);background:rgba(255,255,255,.05)}
+.live i{width:8px;height:8px;border-radius:50%;background:#5BD38A}
+.live.closed i{background:#E0745B}
+nav{position:sticky;top:0;z-index:5;background:rgba(11,20,16,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;gap:8px;overflow-x:auto;padding:10px 14px;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:none;min-height:44px;display:inline-flex;align-items:center;padding:0 18px;border-radius:999px;border:1px solid var(--line);font-size:14px;font-weight:800;color:var(--cream);text-decoration:none;background:rgba(255,255,255,.04)}
+nav a.on{background:var(--cream);border-color:var(--cream);color:var(--bg)}
+main{padding:4px 14px 30px;max-width:680px;margin:0 auto}
+h2{font-family:"Playfair Display",Georgia,serif;font-size:24px;font-weight:600;margin:26px 4px 12px;scroll-margin-top:76px;display:flex;align-items:baseline;gap:10px}
+h2 small{font-family:Manrope,sans-serif;font-size:12px;color:var(--muted);font-weight:600}
+.item{display:flex;gap:14px;align-items:center;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:18px;padding:10px 14px 10px 10px;margin-bottom:10px}
+.pic{flex:none;width:86px;height:86px;border-radius:14px;background:radial-gradient(circle at 50% 35%,#24402F,#13231A);position:relative;overflow:hidden}
+.pic svg{position:absolute;inset:4px;width:calc(100% - 8px);height:calc(100% - 8px);filter:drop-shadow(0 6px 8px rgba(0,0,0,.35))}
+.pic .photo{position:absolute;inset:0;background-size:cover;background-position:center}
+.body{flex:1;min-width:0}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.item h3{font-family:"Playfair Display",Georgia,serif;font-size:17px;font-weight:600;line-height:1.25}
+.price{font-weight:800;color:var(--gold);white-space:nowrap}
+.item p{font-size:13px;color:var(--muted);margin-top:2px}
+.item .more{font-size:12px;color:rgba(246,241,233,.66);margin-top:4px}
+.tags:empty{display:none}
+.tags{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:800;color:#0B1410;background:#A9D8B8;border-radius:6px;padding:1px 7px}
+.tag.hit{background:var(--gold)}
+.off-tag{font-size:11px;font-weight:800;color:#FFD9CC;background:rgba(224,116,91,.25);border-radius:6px;padding:1px 7px}
+.item.off .pic,.item.off h3,.item.off .price{opacity:.45}
+footer{text-align:center;font-size:12px;color:var(--muted);padding:10px 20px 20px}
+footer a{color:var(--gold);display:inline-block;padding:10px 0}
+.call{position:fixed;left:14px;right:14px;bottom:max(14px,env(safe-area-inset-bottom));display:flex;gap:8px;padding:8px;border-radius:999px;background:rgba(11,20,16,.8);border:1px solid var(--line);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.call a{flex:1;min-height:48px;display:grid;place-items:center;border-radius:999px;font-weight:800;font-size:14px;text-decoration:none}
+.call .main{background:linear-gradient(135deg,#9A4A22,#A9552C);color:#fff}
+.call .ghost{border:1px solid var(--line);color:var(--cream)}
+@media (min-width:700px){.call{left:50%;right:auto;width:420px;transform:translateX(-50%)}}
+</style>
+</head>
+<body>
+<header class="top" style="position:relative">
+  <a class="back" href="index.html" aria-label="На сайт ресторана">←</a>
+  <h1>Корюшка <i>и</i> сыр</h1>
+  <p>Цены в рублях · Петроградская сторона</p>
+  <div class="live" id="live"><i></i><span>Ежедневно 12:00–23:00</span></div>
+</header>
+<nav id="nav" aria-label="Разделы меню"></nav>
+<main id="main"></main>
+<footer>Демо-проект студии <a href="index.html">«Ростра»</a></footer>
+<div class="call"><a class="ghost" href="tel:+78120000000">Позвонить в ресторан</a><a class="main" href="index.html#booking">Забронировать</a></div>
+<script>
+/*@LIB*/
+/* Иллюстрации блюд и интерьера (SVG). Если есть фото img/*.jpg — оно ложится поверх. */
+const ART=(()=>{
+const S=(id,body,vb='0 0 200 200')=>`<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice">${body}</svg>`;
+const plate=(id,r=80,cx=100,cy=104)=>`<defs><radialGradient id="${id}p" cx=".4" cy=".35"><stop offset="0" stop-color="#FFFDF8"/><stop offset=".7" stop-color="#EEE6D8"/><stop offset="1" stop-color="#D6CBB8"/></radialGradient><radialGradient id="${id}i" cx=".45" cy=".4"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F1EADF"/></radialGradient></defs><ellipse cx="${cx+6}" cy="${cy+10}" rx="${r}" ry="${r*.96}" fill="#000" opacity=".35"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#${id}p)"/><circle cx="${cx}" cy="${cy}" r="${r*.72}" fill="url(#${id}i)" stroke="#E2D8C6" stroke-width="1.2"/>`;
+const bowl=(id,c1,c2,cx=100,cy=104,r=70)=>`<defs><radialGradient id="${id}b" cx=".45" cy=".4"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></radialGradient></defs><ellipse cx="${cx+6}" cy="${cy+10}" rx="${r+8}" ry="${r+6}" fill="#000" opacity=".35"/><circle cx="${cx}" cy="${cy}" r="${r+8}" fill="#F3ECE0"/><circle cx="${cx}" cy="${cy}" r="${r+8}" fill="none" stroke="#D9CDB8" stroke-width="2"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#${id}b)"/>`;
+const fish=(x,y,s,rot,id)=>`<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})"><path d="M-46 0C-30-14 10-15 30-5L46-15 42 0 46 15 30 5C10 15-30 14-46 0Z" fill="url(#${id}f)"/><path d="M-20-9q5 9 0 18M-6-11q6 11 0 22M8-10q5 10 0 20" stroke="#F7D9A2" stroke-width="1.6" fill="none" opacity=".75"/><circle cx="-36" cy="-2" r="2.4" fill="#3A2412"/></g>`;
+const fishDef=id=>`<defs><linearGradient id="${id}f" x1="0" x2="1"><stop offset="0" stop-color="#F0C27A"/><stop offset=".55" stop-color="#D2843F"/><stop offset="1" stop-color="#9A5226"/></linearGradient></defs>`;
+const lemon=(x,y,r=16)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#F6D45C"/><circle cx="${x}" cy="${y}" r="${r-3}" fill="#FFF0A8"/><path d="M${x} ${y-r+3}V${y+r-3}M${x-r+3} ${y}H${x+r-3}M${x-9} ${y-9}l18 18M${x+9} ${y-9}l-18 18" stroke="#F6D45C" stroke-width="1.5"/>`;
+const herb=(x,y)=>`<g fill="#6E9E5E"><ellipse cx="${x}" cy="${y}" rx="6" ry="3" transform="rotate(-30 ${x} ${y})"/><ellipse cx="${x+7}" cy="${y-5}" rx="5" ry="2.6" transform="rotate(20 ${x+7} ${y-5})"/><ellipse cx="${x+3}" cy="${y+6}" rx="5" ry="2.4" fill="#86B573" transform="rotate(60 ${x+3} ${y+6})"/></g>`;
+const dill=(x,y,rot=0)=>`<g transform="translate(${x} ${y}) rotate(${rot})" stroke="#5E9150" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M0 0v-18M0-6l-6-6M0-10l6-6M0-14l-5-5M0-3l5-4"/></g>`;
+const A={};
+A.koryushka=()=>S('k',fishDef('k')+plate('k')+fish(96,86,.95,-12,'k')+fish(104,112,.95,-4,'k')+fish(92,136,.85,6,'k')+lemon(148,78)+`<ellipse cx="62" cy="80" rx="13" ry="10" fill="#F4EEDC" stroke="#E0D3B6"/><path d="M56 78q6 4 12 0" stroke="#6E9E5E" stroke-width="2" fill="none"/>`+herb(140,140));
+A.tartar=()=>S('t',plate('t')+`<ellipse cx="100" cy="108" rx="36" ry="34" fill="#000" opacity=".12"/><circle cx="98" cy="102" r="34" fill="#E9876A"/>`+[[86,92],[104,88],[112,104],[94,110],[82,106],[100,118],[116,92]].map(([x,y],i)=>`<rect x="${x}" y="${y}" width="10" height="10" rx="2" fill="${i%2?'#F2A387':'#D96C52'}" transform="rotate(${i*17} ${x+5} ${y+5})"/>`).join('')+`<circle cx="98" cy="102" r="10" fill="#F6E9A8"/><circle cx="98" cy="102" r="5" fill="#F2C94C"/>`+[0,1,2,3].map(i=>`<circle cx="${52+i*4}" cy="${70+i*20}" r="9" fill="#BFD9A8" stroke="#7BA463" stroke-width="2"/>`).join('')+`<rect x="128" y="130" width="34" height="18" rx="4" fill="#7A4A2A" transform="rotate(-20 145 139)"/><rect x="132" y="114" width="34" height="18" rx="4" fill="#94603A" transform="rotate(-8 149 123)"/>`+dill(104,78,10));
+A.cheese=()=>S('c',`<ellipse cx="106" cy="114" rx="88" ry="72" fill="#000" opacity=".35"/><rect x="18" y="40" width="166" height="128" rx="22" fill="#A8743F"/><rect x="18" y="40" width="166" height="128" rx="22" fill="none" stroke="#7E5229" stroke-width="3"/><path d="M30 70h140M30 100h140M30 130h140" stroke="#96652F" stroke-width="2" opacity=".6"/><path d="M40 120l44-38 10 46z" fill="#F4D27A"/><path d="M40 120l44-38 4 18z" fill="#F9E3A4"/><circle cx="66" cy="114" r="4" fill="#E2B653"/><circle cx="80" cy="104" r="3" fill="#E2B653"/><rect x="104" y="62" width="48" height="34" rx="4" fill="#FBF3E0"/><path d="M104 66h48" stroke="#E8D9B4" stroke-width="4"/><path d="M112 108l40-6 4 30-40 6z" fill="#E8A951"/><path d="M112 108l40-6v6l-40 6z" fill="#C9823A"/><circle cx="160" cy="146" r="14" fill="#C77A2E"/><circle cx="160" cy="146" r="10" fill="#E9A23B"/>`+[[60,148],[74,152],[88,146],[100,154]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="7" ry="5" fill="#B9874E" stroke="#8C5E2E"/>`).join('')+`<circle cx="166" cy="70" r="7" fill="#7B2F48"/><circle cx="158" cy="78" r="7" fill="#8E3A57"/><circle cx="170" cy="82" r="7" fill="#6A2840"/>`,'0 0 200 200');
+A.beet=()=>S('b',plate('b')+`<path d="M60 90c20-30 60-36 84-10" stroke="#8DBB6E" stroke-width="10" stroke-linecap="round" fill="none" opacity=".9"/>`+[[80,100,18],[112,96,16],[96,124,17],[126,124,13],[70,128,12]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#8E2246"/><circle cx="${x-4}" cy="${y-4}" r="${r*.45}" fill="#B23A62" opacity=".7"/>`).join('')+[[92,100],[106,112],[84,116],[118,108],[100,90],[112,132]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="#FBF6EA"/>`).join('')+[[74,84],[132,90],[120,140],[78,142]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="5" ry="4" fill="#C08A4E"/>`).join(''));
+A.sudak=()=>S('s',plate('s')+`<path d="M58 132c18-30 70-34 92-14" stroke="#EADFC9" stroke-width="22" stroke-linecap="round" fill="none"/><path d="M58 132c18-30 70-34 92-14" stroke="#F6EFE1" stroke-width="12" stroke-linecap="round" fill="none"/><path d="M60 100c4-24 70-32 86-10 6 12-6 22-42 24s-48 2-44-14z" fill="#000" opacity=".1" transform="translate(3 4)"/><path d="M60 100c4-24 70-32 86-10 6 12-6 22-42 24s-48 2-44-14z" fill="#E9C48A"/><path d="M64 98c6-18 62-24 78-6" stroke="#C47C34" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M70 106c20 4 50 2 70-6" stroke="#F6E7C8" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/><path d="M74 92c10-8 44-12 58-4" stroke="#B87A35" stroke-width="2" fill="none" opacity=".6"/>`+[[60,120],[150,116],[140,140],[70,146]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="#E07A4F"/>`).join('')+`<path d="M120 128c10-6 20-4 26 2" stroke="#9C6B3A" stroke-width="4" fill="none" stroke-linecap="round"/>`+dill(126,86,30)+dill(84,88,-20));
+A.shchi=()=>S('sh',bowl('sh','#E8955C','#B85A30')+[[78,90],[110,82],[124,110],[86,120],[100,104]].map(([x,y],i)=>`<path d="M${x} ${y}q14 ${i%2?6:-6} 26 0" stroke="#F3E3B0" stroke-width="4" fill="none" stroke-linecap="round"/>`).join('')+`<rect x="96" y="108" width="26" height="20" rx="6" fill="#6B3420"/><rect x="99" y="110" width="20" height="6" rx="3" fill="#8A4A30"/><ellipse cx="80" cy="84" rx="14" ry="10" fill="#FFFDF6"/>`+dill(126,92,20)+dill(70,118,-30)+`<circle cx="122" cy="76" r="3" fill="#F6E9C0" opacity=".6"/><circle cx="74" cy="104" r="2.5" fill="#F6E9C0" opacity=".6"/>`);
+A.pelmeni=()=>S('pe',plate('pe')+[[70,92,-20],[100,80,0],[130,92,20],[66,122,-30],[96,112,5],[126,124,25],[96,142,-5]].map(([x,y,r])=>`<g transform="translate(${x} ${y}) rotate(${r})"><ellipse cx="2" cy="4" rx="16" ry="10" fill="#000" opacity=".12"/><path d="M-15 2c0-12 30-12 30 0 0 6-30 6-30 0z" fill="#F7EEDC"/><path d="M-13 0c4 4 22 4 26 0" stroke="#E4D3B2" stroke-width="2" fill="none"/></g>`).join('')+`<ellipse cx="140" cy="148" rx="16" ry="12" fill="#FFFFFF" stroke="#EDE5D4"/>`+dill(144,140,10)+herb(60,150));
+A.perlovka=()=>S('pr',bowl('pr','#E9D9B4','#C9AF7E')+Array.from({length:60},(_,i)=>{const a=i*2.4,r=8+(i%10)*5.6;return `<ellipse cx="${(100+Math.cos(a)*r).toFixed(1)}" cy="${(104+Math.sin(a)*r).toFixed(1)}" rx="3.2" ry="2.2" fill="${i%3?'#F4E8CC':'#D9C397'}"/>`}).join('')+[[82,94,0],[116,98,30],[98,122,-20]].map(([x,y,r])=>`<g transform="translate(${x} ${y}) rotate(${r})"><path d="M-12 0a12 9 0 0 1 24 0z" fill="#8A5A34"/><rect x="-4" y="0" width="8" height="12" rx="3" fill="#EAD8B6"/></g>`).join('')+dill(120,124,20));
+A.medovik=()=>S('m',plate('m',80)+`<g transform="translate(100 106)"><path d="M-50 18L0-40 50 18z" fill="#000" opacity=".12" transform="translate(5 6)"/><path d="M-50 16L0-42 50 16v20H-50z" fill="#E5B26A"/>`+[0,1,2,3,4].map(i=>`<rect x="-50" y="${16+i*4}" width="100" height="2" fill="${i%2?'#FBEBC8':'#C98A3E'}"/>`).join('')+`<path d="M-50 16L0-42 50 16z" fill="#D59A4C"/><path d="M-50 16L0-42" stroke="#B57A30" stroke-width="2"/>`+[[-14,-8],[4,-16],[14,4],[-26,8],[0,8]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2.2" fill="#F6DFA8"/>`).join('')+`</g>`+herb(150,70));
+A.syrniki=()=>S('sy',plate('sy')+[[78,92],[118,90],[98,124]].map(([x,y])=>`<g><ellipse cx="${x+3}" cy="${y+5}" rx="24" ry="20" fill="#000" opacity=".12"/><ellipse cx="${x}" cy="${y}" rx="24" ry="20" fill="#E8AE5C"/><ellipse cx="${x-2}" cy="${y-2}" rx="17" ry="13" fill="#F3C783"/></g>`).join('')+`<ellipse cx="138" cy="136" rx="17" ry="13" fill="#FFFFFF" stroke="#EDE5D4"/>`+[[64,136],[70,142],[60,144],[150,70],[144,64]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="#C32D3E"/>`).join('')+`<path d="M90 70c6-10 20-12 28-4" stroke="#FFFFFF" stroke-width="3" fill="none" opacity=".6"/>`);
+A.kartoshka=()=>S('ka',plate('ka')+[[82,96,-20],[118,98,15],[100,128,0]].map(([x,y,r])=>`<g transform="translate(${x} ${y}) rotate(${r})"><ellipse cx="3" cy="5" rx="22" ry="15" fill="#000" opacity=".14"/><ellipse rx="22" ry="15" fill="#5A3420"/><ellipse cx="-4" cy="-4" rx="12" ry="7" fill="#74462B"/>`+[[-10,-2],[6,-6],[10,4],[-4,6],[0,0]].map(([a,b])=>`<circle cx="${a}" cy="${b}" r="1.6" fill="#C9A27A"/>`).join('')+`<circle cx="-14" cy="-1" r="3.5" fill="#F7F1E6"/><circle cx="-8" cy="-2" r="3" fill="#F7F1E6"/></g>`).join('')+herb(150,140));
+A.icecream=()=>S('ic',bowl('ic','#F3EDE2','#DCCFB8')+`<circle cx="88" cy="100" r="26" fill="#F8EEDB"/><circle cx="82" cy="94" r="10" fill="#FFFFFF" opacity=".6"/><circle cx="116" cy="114" r="26" fill="#F2DFC0"/><circle cx="110" cy="108" r="9" fill="#FFFFFF" opacity=".5"/>`+[[96,88],[104,120],[124,100],[78,118],[110,96]].map(([x,y])=>`<path d="M${x} ${y}l6-2 2 6-6 2z" fill="#C0803E"/>`).join('')+`<path d="M70 126c20 10 50 10 70-4" stroke="#C0803E" stroke-width="3" fill="none" stroke-linecap="round"/>`);
+const glass=(id,c1,c2,extra='')=>S(id,`<defs><linearGradient id="${id}g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs><ellipse cx="104" cy="170" rx="44" ry="10" fill="#000" opacity=".35"/><path d="M66 40h68l-8 128H74z" fill="#FFFFFF" opacity=".12" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="2"/><path d="M70 70h60l-6 94H76z" fill="url(#${id}g)"/>${extra}<path d="M78 46l-4 116" stroke="#FFFFFF" stroke-width="4" opacity=".35" stroke-linecap="round"/>`);
+A.mors=()=>glass('mo','#E0475C','#8E1A2E',`<rect x="84" y="78" width="16" height="16" rx="3" fill="#FFFFFF" opacity=".45" transform="rotate(12 92 86)"/><rect x="104" y="90" width="14" height="14" rx="3" fill="#FFFFFF" opacity=".4" transform="rotate(-10 111 97)"/><circle cx="118" cy="62" r="6" fill="#C32D3E"/><circle cx="110" cy="58" r="6" fill="#D93A4C"/>`+dill(124,58,30));
+A.kvas=()=>glass('kv','#B8743A','#5E3416',`<path d="M70 70c8-10 52-10 60 0v6H70z" fill="#F1DEB8"/><circle cx="90" cy="110" r="2" fill="#F6D9A0" opacity=".7"/><circle cx="108" cy="130" r="2" fill="#F6D9A0" opacity=".7"/><circle cx="100" cy="96" r="1.6" fill="#F6D9A0" opacity=".7"/>`);
+A.tea=()=>S('te',`<ellipse cx="104" cy="168" rx="70" ry="12" fill="#000" opacity=".35"/><path d="M48 96c0-34 104-34 104 0v34c0 24-104 24-104 0z" fill="#F3EDE2"/><path d="M48 104c0 4 104 4 104 0" stroke="#C46A3B" stroke-width="6"/><path d="M152 104c22-6 30 10 16 22l-16 10" stroke="#F3EDE2" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M48 112c-18-4-28 6-30 14" stroke="#F3EDE2" stroke-width="9" fill="none" stroke-linecap="round"/><ellipse cx="100" cy="68" rx="30" ry="6" fill="#E0D6C4"/><circle cx="100" cy="58" r="8" fill="#C46A3B"/>`+[[76,136],[96,144],[118,138]].map(([x,y])=>`<path d="M${x} ${y}l6-4 3 6-6 3z" fill="#8E3A57" opacity=".8"/>`).join('')+`<path d="M86 40c-6-8 6-12 0-20M104 40c-6-8 6-12 0-20" stroke="#FFFFFF" stroke-width="2" fill="none" opacity=".4" stroke-linecap="round"/>`);
+A.coffee=()=>S('co',`<ellipse cx="106" cy="112" rx="78" ry="74" fill="#000" opacity=".35"/><circle cx="100" cy="104" r="78" fill="#F3EDE2"/><circle cx="100" cy="104" r="60" fill="#FFFFFF"/><path d="M160 98c22-4 30 16 10 22" stroke="#FFFFFF" stroke-width="10" fill="none"/><circle cx="100" cy="104" r="48" fill="#8A5A34"/><circle cx="100" cy="104" r="44" fill="#B98455"/><path d="M100 90c-10-14-30-2-20 12l20 20 20-20c10-14-10-26-20-12z" fill="#F6EBD6"/><circle cx="100" cy="104" r="44" fill="none" stroke="#7A4A28" stroke-width="2" opacity=".5"/>`);
+A.bread=()=>S('br',`<ellipse cx="106" cy="134" rx="80" ry="30" fill="#000" opacity=".35"/><rect x="20" y="118" width="164" height="40" rx="12" fill="#8A5B34"/><path d="M28 120c0-56 144-56 144 0z" fill="#C98A47"/><path d="M28 120c0-56 144-56 144 0" fill="none" stroke="#9B6230" stroke-width="3"/><path d="M60 98q14-16 26 2M88 86q14-16 26 2M118 92q14-16 26 2" stroke="#F1D19C" stroke-width="5" fill="none" stroke-linecap="round"/>`+Array.from({length:18},(_,i)=>`<circle cx="${40+((i*37)%124)}" cy="${102+((i*13)%16)}" r="1.4" fill="#F4E2BE" opacity=".8"/>`).join('')+`<rect x="136" y="128" width="40" height="18" rx="4" fill="#F7E7A8"/><rect x="136" y="128" width="40" height="6" rx="3" fill="#FBF0C6"/>`);
+A.hall=()=>S('ha',`<defs><linearGradient id="hag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A2219"/><stop offset="1" stop-color="#20140F"/></linearGradient><radialGradient id="hal" cx=".5" cy=".3" r=".6"><stop offset="0" stop-color="#F2B66D" stop-opacity=".55"/><stop offset="1" stop-color="#F2B66D" stop-opacity="0"/></radialGradient></defs><rect width="300" height="200" fill="url(#hag)"/>`+Array.from({length:10},(_,r)=>Array.from({length:9},(_,c)=>`<rect x="${c*36-(r%2)*18}" y="${r*14}" width="34" height="12" rx="1.5" fill="#6B3424" opacity="${.35+((r*7+c*3)%5)*.08}"/>`).join('')).join('')+`<path d="M110 132V64a40 40 0 0 1 80 0v68z" fill="#1B2B3E"/><path d="M110 132V64a40 40 0 0 1 80 0v68z" fill="none" stroke="#C9A06A" stroke-width="4"/><path d="M150 26v106M110 86h80" stroke="#C9A06A" stroke-width="3"/><circle cx="170" cy="50" r="5" fill="#F6E3B0" opacity=".8"/><rect y="150" width="300" height="50" fill="#2A1A12"/>`+[60,150,240].map(x=>`<g><line x1="${x}" y1="0" x2="${x}" y2="34" stroke="#C9A06A" stroke-width="1.5"/><path d="M${x-12} 34h24l-6 10h-12z" fill="#C9A06A"/><circle cx="${x}" cy="46" r="40" fill="url(#hal)"/></g>`).join('')+[[50,150],[150,154],[250,150]].map(([x,y])=>`<g><ellipse cx="${x}" cy="${y}" rx="40" ry="9" fill="#5C3A22"/><rect x="${x-3}" y="${y}" width="6" height="34" fill="#4A2E1B"/><circle cx="${x-14}" cy="${y-4}" r="4" fill="#F6EEDF"/><circle cx="${x+12}" cy="${y-3}" r="4" fill="#F6EEDF"/><rect x="${x-1}" y="${y-14}" width="2" height="10" fill="#F2B66D"/></g>`).join(''),'0 0 300 200');
+A.window=()=>S('wi',`<defs><linearGradient id="wis" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A3B5E"/><stop offset="1" stop-color="#C46A3B"/></linearGradient></defs><rect width="200" height="260" fill="#241610"/><path d="M40 230V90a60 60 0 0 1 120 0v140z" fill="url(#wis)"/><path d="M40 190h120" stroke="#1A120D" stroke-width="2"/><path d="M40 196l20-8 14 4 18-12 20 10 16-6 32 10v36H40z" fill="#14100E"/><circle cx="130" cy="84" r="10" fill="#F6E3B0" opacity=".85"/><path d="M40 230V90a60 60 0 0 1 120 0v140z" fill="none" stroke="#C9A06A" stroke-width="5"/><path d="M100 30v200M40 130h120" stroke="#C9A06A" stroke-width="3"/><rect x="20" y="226" width="160" height="34" fill="#3A2417"/><ellipse cx="72" cy="226" rx="16" ry="4" fill="#5C3A22"/><path d="M66 206h12l-2 20h-8z" fill="#F6EEDF" opacity=".25" stroke="#F6EEDF" stroke-opacity=".6"/><path d="M68 214h8l-1 12h-6z" fill="#8E1A2E"/><rect x="120" y="212" width="4" height="14" fill="#F6EEDF"/><path d="M122 206q3 3 0 6q-3-3 0-6z" fill="#F2B66D"/>`,'0 0 200 260');
+A.banquet=()=>S('bq',`<defs><radialGradient id="bql" cx=".5" cy=".2" r=".7"><stop offset="0" stop-color="#F2B66D" stop-opacity=".5"/><stop offset="1" stop-color="#F2B66D" stop-opacity="0"/></radialGradient></defs><rect width="200" height="260" fill="#1F2A22"/><rect width="200" height="260" fill="url(#bql)"/>`+[30,70,110,150,190].map(x=>`<circle cx="${x-10}" cy="${20+(x%3)*6}" r="3" fill="#F6E3B0"/><path d="M${x-10} 0V${18+(x%3)*6}" stroke="#F6E3B0" stroke-width=".8" opacity=".6"/>`).join('')+`<path d="M10 150h180l-20 40H30z" fill="#F3ECE0"/><rect x="30" y="190" width="140" height="70" fill="#E6DCC9"/>`+[50,82,118,150].map(x=>`<ellipse cx="${x}" cy="160" rx="13" ry="5" fill="#FFFFFF"/><path d="M${x-3} 140h6l-1 14h-4z" fill="#FFFFFF" opacity=".5" stroke="#FFFFFF" stroke-opacity=".7"/>`).join('')+`<rect x="96" y="120" width="8" height="30" rx="2" fill="#F6EEDF"/><path d="M100 112q5 5 0 9q-5-4 0-9z" fill="#F2B66D"/>`,'0 0 200 260');
+A.evening=()=>A.window();
+return A;})();
+
+/* Единый источник меню для index.html и menu.html. Правьте только здесь, затем запустите сборку (build.py).
+   Поля: n — название, d — описание, p — цена ₽, v — вегетарианское, on — в наличии,
+   img — фото (необязательно), art — иллюстрация, badge — метка, more — выход, состав, аллергены */
+const MENU={
+ "Закуски":[
+  {n:"Корюшка в хрустящей панировке",d:"С соусом тартар и лимоном",p:790,v:0,on:1,img:"img/2.jpg",art:"koryushka",badge:"Хит сезона",more:"200 г · корюшка, мука, яйцо, соус тартар · аллергены: рыба, глютен, яйцо"},
+  {n:"Тартар из ряпушки",d:"Огурец, укроп, ржаные гренки",p:750,v:0,on:1,img:"",art:"tartar",badge:"",more:"160 г · ряпушка, огурец, желток, укроп, ржаной хлеб · аллергены: рыба, глютен, яйцо"},
+  {n:"Сырная тарелка «Северная»",d:"Пять сыров Ленобласти, мёд, орехи",p:980,v:1,on:1,img:"img/3.jpg",art:"cheese",badge:"На компанию",more:"300 г · пять сыров, мёд, грецкий орех, виноград · аллергены: молоко, орехи"},
+  {n:"Салат с печёной свёклой",d:"Козий сыр, фундук, руккола",p:590,v:1,on:1,img:"",art:"beet",badge:"",more:"220 г · свёкла, козий сыр, фундук, руккола · аллергены: молоко, орехи"}
+ ],
+ "Горячее":[
+  {n:"Судак с пюре из сельдерея",d:"Раковый соус, печёный лук",p:1290,v:0,on:1,img:"img/4.jpg",art:"sudak",badge:"Выбор шефа",more:"320 г · судак, сельдерей, сливки, раковый соус · аллергены: рыба, ракообразные, молоко"},
+  {n:"Щи из квашеной капусты",d:"С томлёной говяжьей щекой",p:520,v:0,on:1,img:"",art:"shchi",badge:"",more:"350 г · квашеная капуста, говяжья щека, сметана · аллергены: молоко"},
+  {n:"Пельмени с олениной",d:"Домашняя сметана, зелень",p:790,v:0,on:1,img:"",art:"pelmeni",badge:"",more:"250 г · оленина, тесто, сметана, укроп · аллергены: глютен, яйцо, молоко"},
+  {n:"Перловка с белыми грибами",d:"Сливочный соус, сыр",p:640,v:1,on:1,img:"",art:"perlovka",badge:"",more:"280 г · перловка, белые грибы, сливки, сыр · аллергены: глютен, молоко"}
+ ],
+ "Десерты":[
+  {n:"Медовик",d:"По бабушкиному рецепту",p:420,v:1,on:1,img:"img/5.jpg",art:"medovik",badge:"Хит",more:"150 г · мёд, мука, сметанный крем · аллергены: глютен, яйцо, молоко"},
+  {n:"Сырники",d:"Сметана и брусничное варенье",p:450,v:1,on:1,img:"",art:"syrniki",badge:"",more:"200 г · творог, яйцо, мука, брусника · аллергены: молоко, яйцо, глютен"},
+  {n:"Пирожное «Картошка»",d:"С тёмным шоколадом",p:350,v:1,on:1,img:"",art:"kartoshka",badge:"",more:"120 г · бисквит, какао, тёмный шоколад · аллергены: глютен, молоко, яйцо"},
+  {n:"Мороженое из ряженки",d:"С карамелизованными орехами",p:320,v:1,on:1,img:"",art:"icecream",badge:"",more:"130 г · ряженка, сливки, карамель, орехи · аллергены: молоко, орехи"}
+ ],
+ "Напитки":[
+  {n:"Морс клюквенный",d:"0,5 л",p:290,v:1,on:1,img:"",art:"mors",badge:"",more:"500 мл · клюква, вода, сахар"},
+  {n:"Иван-чай с чабрецом",d:"Чайник 0,6 л",p:380,v:1,on:1,img:"",art:"tea",badge:"",more:"600 мл · иван-чай, чабрец, мёд по желанию"},
+  {n:"Квас домашний",d:"0,5 л",p:260,v:1,on:1,img:"",art:"kvas",badge:"",more:"500 мл · ржаной солод, вода, сахар · аллергены: глютен"},
+  {n:"Капучино",d:"Молоко на выбор: обычное или овсяное",p:280,v:1,on:1,img:"",art:"coffee",badge:"",more:"300 мл · эспрессо, молоко · аллергены: молоко (есть овсяное)"}
+ ]
+};
+/* Фото ставится только если файл реально загрузился — без запросов 404 в консоли */
+const PHOTOS=/*@PHOTOS*/[]/*@END*/; // заполняет build.py по содержимому папки img/
+const PHOTO=(el,src)=>{if(!src||!PHOTOS.includes(src))return;const i=new Image();i.onload=()=>{el.style.backgroundImage=`url(${src})`;el.classList.add('has')};i.src=src;};
+const fillPhotos=root=>root.querySelectorAll('[data-photo]').forEach(el=>PHOTO(el,el.dataset.photo));
+
+/*@END-LIB*/
+const nav=document.getElementById('nav'), main=document.getElementById('main');
+const fmt=n=>n.toLocaleString('ru-RU')+' ₽';
+Object.entries(MENU).forEach(([cat,items],i)=>{
+  const id='c'+i;
+  nav.insertAdjacentHTML('beforeend',`<a href="#${id}" data-id="${id}">${cat}</a>`);
+  main.insertAdjacentHTML('beforeend',`<h2 id="${id}">${cat}<small>${items.length} позиции</small></h2>`+items.map(m=>`
+    <div class="item${m.on?'':' off'}">
+      <div class="pic">${ART[m.art]().replace('slice','meet')}<div class="photo" data-photo="${m.img}"></div></div>
+      <div class="body">
+        <div class="row"><h3>${m.n}</h3><span class="price">${fmt(m.p)}</span></div>
+        <p>${m.d}</p>
+        <p class="more">${m.more}</p>
+        <div class="tags">${m.badge?`<span class="tag hit">${m.badge}</span>`:''}${m.v?'<span class="tag">🌿 вегетарианское</span>':''}${m.on?'':'<span class="off-tag">Сегодня нет в наличии</span>'}</div>
+      </div>
+    </div>`).join(''));
+});
+const links=[...nav.children];
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){links.forEach(a=>{const on=a.dataset.id===e.target.id;a.classList.toggle('on',on);if(on)nav.scrollTo({left:a.offsetLeft-14,behavior:'smooth'})})}
+}),{rootMargin:'-70px 0px -70% 0px'});
+document.querySelectorAll('main h2').forEach(h=>io.observe(h));
+fillPhotos(main);
+links[0].classList.add('on');
+(function(){const el=document.getElementById('live');
+  const h=+new Intl.DateTimeFormat('ru-RU',{hour:'numeric',hour12:false,timeZone:'Europe/Moscow'}).format(new Date());
+  const open=h>=12&&h<23;el.querySelector('span').textContent=open?'Сейчас открыто · до 23:00':'Сейчас закрыто · откроемся в 12:00';
+  if(!open)el.classList.add('closed');})();
+</script>
+</body>
+</html>

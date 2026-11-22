@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>«Корюшка и сыр» — ресторан петербургской кухни на Петроградской</title>
+<meta name="description" content="Корюшка, северные сыры и домашний хлеб на Петроградской стороне. Открыты каждый день с 12:00 до 23:00. Бронирование столов онлайн.">
+<meta property="og:title" content="«Корюшка и сыр» — ресторан петербургской кухни">
+<meta property="og:description" content="Корюшка, северные сыры и домашний хлеб на Петроградской. Забронируйте стол онлайн.">
+<meta property="og:image" content="img/hero.jpg">
+<meta name="theme-color" content="#0B1410">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B1410; --bg2:#101D17; --green:#1F3A2E; --copper:#C46A3B; --gold:#F2B66D;
+  --cream:#F6F1E9; --muted:rgba(246,241,233,.74); --glass:rgba(255,255,255,.06); --gline:rgba(255,255,255,.12);
+  --r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--cream);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1180px,92%);margin:0 auto}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;line-height:1.08;font-weight:700}
+h2{font-size:clamp(34px,6vw,64px);margin-bottom:16px}
+h2 em{font-style:italic;color:var(--gold);font-weight:500}
+.lead{color:var(--muted);max-width:600px;margin-bottom:44px;font-size:18px;line-height:1.55}
+h2{text-wrap:balance}
+section{scroll-margin-top:96px}
+#about,#reviews{padding:140px 0}
+@media(max-width:900px){#about,#reviews{padding:80px 0}}
+@view-transition{navigation:auto}
+section{padding:110px 0;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:800;margin-bottom:16px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--gold)}
+
+/* прогресс прокрутки */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--copper),var(--gold));z-index:100}
+
+/* кнопки */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 30px;border-radius:999px;font-weight:800;font-size:15px;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:transform .25s,box-shadow .25s,background .25s;overflow:hidden;will-change:transform}
+.btn-main{background:linear-gradient(135deg,#9A4A22,#A9552C);color:#fff;box-shadow:0 10px 40px -8px rgba(196,106,59,.7)}
+.btn-main:hover{box-shadow:0 14px 50px -6px rgba(242,182,109,.8)}
+.btn-main::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);animation:shine 3.5s infinite}
+@keyframes shine{60%,100%{transform:translateX(120%)}}
+.btn-glass{background:var(--glass);border-color:var(--gline);color:var(--cream);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.btn-glass:hover{background:rgba(255,255,255,.12)}
+
+/* шапка */
+header{position:fixed;top:14px;left:0;right:0;z-index:50}
+.nav{display:flex;align-items:center;justify-content:space-between;height:62px;padding:0 10px 0 24px;border-radius:999px;background:rgba(11,20,16,.45);border:1px solid var(--gline);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+.logo{font-family:"Playfair Display",serif;font-weight:700;font-size:20px}
+.logo b{color:var(--gold);font-style:italic;font-weight:500}
+.nav ul{display:flex;gap:30px;list-style:none;font-weight:500;font-size:14px}
+.nav ul a{opacity:.8;transition:.2s}
+.nav ul a:hover{opacity:1;color:var(--gold)}
+.nav .btn{padding:11px 20px;font-size:14px}
+.burger{display:none;background:none;border:0;color:var(--cream);font-size:26px;cursor:pointer;padding:8px 14px}
+
+/* главный экран */
+.hero{min-height:100svh;display:flex;align-items:center;overflow:hidden;padding:120px 0 80px}
+#gl{position:absolute;inset:0;width:100%;height:100%;display:block;background:radial-gradient(circle at 70% 40%,#C46A3B55,transparent 50%),radial-gradient(circle at 20% 80%,#2D524288,transparent 50%),var(--bg)}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(11,20,16,.85));pointer-events:none}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:30px}
+.hero h1{font-size:clamp(46px,8.4vw,108px);letter-spacing:-.02em;margin-bottom:24px}
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em}
+.hero h1 .w span{display:inline-block;transform:translateY(110%) rotate(6deg);animation:up 1s cubic-bezier(.2,.8,.2,1) forwards}
+.hero h1 em{color:var(--gold);font-weight:500}
+@keyframes up{to{transform:none}}
+.hero p{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:520px;margin-bottom:36px;opacity:0;animation:fade 1s .9s forwards}
+.hero .btns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fade 1s 1.1s forwards}
+@keyframes fade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.stats{display:flex;gap:34px;margin-top:48px;flex-wrap:wrap;opacity:0;animation:fade 1s 1.3s forwards}
+.stats b{display:block;font-family:"Playfair Display",serif;font-size:34px;color:var(--gold);line-height:1}
+.stats span{font-size:13px;color:var(--muted)}
+
+/* 3D тарелка */
+.stage{perspective:1100px;display:grid;place-items:center;height:min(560px,80vw)}
+.plate{position:relative;width:min(440px,74vw);aspect-ratio:1;transform-style:preserve-3d;transform:rotateX(52deg) rotateZ(0);transition:transform .15s linear;animation:float 7s ease-in-out infinite}
+@keyframes float{50%{translate:0 -14px}}
+.plate .dish{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0%,#F3EDE3 38%,#D9CFBF 68%,#B9AD99 100%);box-shadow:0 60px 80px -20px rgba(0,0,0,.7),inset 0 0 0 14px rgba(255,255,255,.5),inset 0 0 0 16px rgba(0,0,0,.06)}
+.plate .inner{position:absolute;inset:16%;border-radius:50%;background:radial-gradient(circle at 40% 35%,#FFFDF8,#EDE5D8);box-shadow:inset 0 6px 20px rgba(0,0,0,.12)}
+.plate .food{position:absolute;inset:22%;transform:translateZ(14px);display:grid;place-items:center;filter:drop-shadow(0 30px 20px rgba(0,0,0,.35))}
+.plate .ring{position:absolute;inset:-14%;transform:translateZ(2px);animation:spin 26s linear infinite}
+.plate .ring text{font:700 13px Manrope,sans-serif;letter-spacing:2px;fill:var(--gold)}
+@keyframes spin{to{transform:translateZ(2px) rotate(360deg)}}
+.glow{position:absolute;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(242,182,109,.45),transparent 65%);filter:blur(30px);transform:translateZ(-60px)}
+
+/* бегущая строка */
+.marquee{border-block:1px solid var(--gline);padding:22px 0;overflow:hidden;white-space:nowrap;background:var(--bg2)}
+.marquee div{display:inline-block;animation:mq 30s linear infinite;font-family:"Playfair Display",serif;font-size:clamp(22px,3vw,34px);font-style:italic}
+.marquee span{color:var(--gold);margin:0 28px;font-style:normal}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* стеклянные 3D-карточки */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;perspective:1000px}
+.tilt{position:relative;border-radius:var(--r);padding:36px 30px;background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.02));border:1px solid var(--gline);backdrop-filter:blur(14px);transform-style:preserve-3d;transition:transform .2s ease-out;overflow:hidden}
+.tilt::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(242,182,109,.22),transparent 45%);pointer-events:none}
+.tilt .ic{width:58px;height:58px;border-radius:16px;border:1px solid rgba(242,182,109,.35);display:grid;place-items:center;margin-bottom:22px;transform:translateZ(50px);background:rgba(242,182,109,.06)}
+.ic svg,.info svg{stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.info li svg{flex:none;width:22px;height:22px;margin-top:2px}
+.tilt h3{font-size:26px;margin-bottom:10px;transform:translateZ(30px)}
+.tilt p{color:var(--muted);font-size:15px;transform:translateZ(20px)}
+.tilt .num{position:absolute;right:22px;top:14px;font-family:"Playfair Display",serif;font-size:70px;color:rgba(255,255,255,.05)}
+
+/* меню — 3D-переворот */
+#menu{background:var(--bg2)}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:34px}
+.tab{padding:11px 22px;border-radius:999px;border:1px solid var(--gline);background:var(--glass);font:inherit;font-weight:700;font-size:14px;cursor:pointer;color:var(--cream);transition:.25s}
+.tab.on{background:var(--cream);color:var(--bg);border-color:var(--cream)}
+.flips{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.flip{perspective:1000px;height:340px;cursor:pointer;animation:pop .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes pop{from{opacity:0;transform:translateY(30px) scale(.95)}}
+.flip-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:var(--r);backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;border:1px solid var(--gline);display:flex;flex-direction:column;justify-content:flex-end;padding:20px}
+.front{background:radial-gradient(circle at 50% 30%,#24402F,#13231A 70%);padding:0;justify-content:flex-start}
+.front .art{position:relative;height:58%;flex:none;overflow:hidden}
+.front .art svg{position:absolute;left:50%;top:50%;width:86%;height:86%;transform:translate(-50%,-46%);transition:transform .6s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 14px 18px rgba(0,0,0,.35))}
+.front .txt{flex:1;display:flex;flex-direction:column;justify-content:flex-end}
+.flip:hover .front .art svg{transform:translate(-50%,-46%) scale(1.07) rotate(-4deg)}
+.photo{position:absolute;inset:0;background-size:cover;background-position:center}
+.front .badge{position:absolute;left:12px;top:12px;font-size:11px;font-weight:800;letter-spacing:.04em;background:var(--gold);color:#1A120D;padding:4px 10px;border-radius:99px}
+.front .txt{padding:14px 18px 18px;background:linear-gradient(180deg,rgba(11,20,16,0),rgba(11,20,16,.6))}
+.front>*{position:relative}
+.front::after{content:"";position:absolute;inset:0;opacity:.22;mix-blend-mode:overlay;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.front .desc{font-size:13px;opacity:.82;line-height:1.35;margin-bottom:8px}
+.front h4{font-family:"Playfair Display",serif;font-size:20px;line-height:1.15;margin-bottom:6px}
+.front .price{color:var(--gold);font-weight:800;font-size:18px}
+.hint{position:absolute!important;top:10px;right:10px;width:30px;height:30px;display:grid;place-items:center;font-size:15px;font-weight:700;background:rgba(0,0,0,.4);border-radius:50%;color:#fff}
+.back{transform:rotateY(180deg);background:linear-gradient(160deg,var(--green),var(--bg));justify-content:center;text-align:center;gap:10px}
+.back h4{font-family:"Playfair Display",serif;font-size:21px;line-height:1.2}
+.back p{color:var(--muted);font-size:14px}
+.back .more{display:flex;flex-direction:column;gap:4px;font-size:13.5px;line-height:1.4}
+.back .more span:first-child{color:var(--gold);font-weight:800;font-size:15px}
+.back .more b{color:var(--cream)}
+.back .veg{font-size:13px;color:#A9D8B8}
+.front .tag{align-self:flex-start;display:inline-block;margin:4px 0 2px;font-size:11px;font-weight:800;color:#0B1410;background:#A9D8B8;border-radius:6px;padding:2px 8px}
+.na{font-size:12px;color:#FFB7A3;font-weight:700}
+.flip.off .art{opacity:.45}
+.back .price{font-family:"Playfair Display",serif;font-size:34px;color:var(--gold)}
+.tag{display:inline-block;font-size:11px;font-weight:800;color:#0B1410;background:#A9D8B8;border-radius:6px;padding:2px 8px;margin-left:6px;vertical-align:middle}
+.menu-cta{margin-top:40px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:14px}
+
+/* 3D-карусель */
+#gallery{overflow:hidden}
+.ring3d{height:520px;perspective:1200px;display:grid;place-items:center;cursor:grab;touch-action:pan-y;user-select:none}
+.ring3d:active{cursor:grabbing}
+.carousel{position:relative;width:290px;height:390px;transform-style:preserve-3d}
+.slide-art,.slide-art svg{position:absolute;inset:0;width:100%;height:100%}
+.slide .photo{border-radius:inherit}
+.slide{position:absolute;inset:0;border-radius:var(--r);overflow:hidden;background:#1F3A2E;border:1px solid var(--gline);box-shadow:0 30px 60px -20px rgba(0,0,0,.8);display:flex;align-items:flex-end;padding:18px;font-weight:800;backface-visibility:hidden}
+.slide::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.6))}
+.slide span{position:relative;z-index:2}
+.slide::after{z-index:1}
+.ring-hint{text-align:center;color:var(--muted);font-size:13px;margin-top:10px}
+
+/* отзывы */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rev .stars{color:var(--gold);letter-spacing:4px;margin-bottom:14px;transform:translateZ(30px)}
+.rev p{font-family:"Playfair Display",serif;font-style:italic;font-size:19px;line-height:1.45;margin-bottom:18px;transform:translateZ(20px)}
+.rev b{font-size:13px;color:var(--muted)}
+
+/* бронь */
+#booking{background:var(--bg2)}
+.book{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:start}
+form{padding:34px;border-radius:28px;background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid var(--gline);backdrop-filter:blur(16px);display:grid;grid-template-columns:1fr 1fr;gap:16px;box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
+label{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:grid;gap:8px}
+::placeholder{color:rgba(246,241,233,.62);opacity:1}
+input,select,textarea{font:inherit;font-weight:500;font-size:15px;text-transform:none;letter-spacing:0;padding:14px 16px;border:1px solid var(--gline);border-radius:14px;background:rgba(0,0,0,.25);color:var(--cream);width:100%;color-scheme:dark}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(242,182,109,.15)}
+.full{grid-column:1/-1}
+.consent{display:flex;gap:10px;align-items:flex-start;text-transform:none;letter-spacing:0;font-size:13px;font-weight:500}
+.consent input{width:20px;height:20px;flex:none;margin-top:2px;accent-color:var(--copper)}
+.consent a{color:var(--gold);text-decoration:underline}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button{flex:1;min-width:48px;min-height:48px;border-radius:12px;border:1px solid var(--gline);background:rgba(0,0,0,.25);color:var(--cream);font:inherit;font-weight:700;cursor:pointer}
+.seg button.on{background:var(--cream);color:var(--bg)}
+.ok{display:none;grid-column:1/-1;background:rgba(169,216,184,.12);border:1px solid rgba(169,216,184,.4);color:#CFEBD8;padding:16px;border-radius:14px}
+.info{list-style:none}
+.info a,.logo{display:inline-block;padding:10px 0}
+.info li{padding:16px 0;border-bottom:1px solid var(--gline);display:flex;gap:14px;color:var(--muted)}
+
+/* контакты */
+.contacts{display:grid;grid-template-columns:1fr 1.3fr;gap:40px;align-items:start}
+.mapbox{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--gline);background:var(--bg2)}
+.mapbox::before{content:"Карта загружается…";position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-size:14px}
+.mapbox iframe{position:relative}
+.mapbox iframe{width:100%;height:360px;border:0;display:block;filter:grayscale(.3) contrast(1.05)}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+
+footer{border-top:1px solid var(--gline);padding:34px 0;font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{color:var(--gold)}
+
+.live{margin-right:18px;display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border-radius:99px;background:var(--glass);border:1px solid var(--gline);backdrop-filter:blur(10px);font-size:13px;font-weight:700;margin-bottom:22px;opacity:0;animation:fade 1s .2s forwards}
+.live i{width:8px;height:8px;border-radius:50%;background:#5BD38A;box-shadow:0 0 0 0 rgba(91,211,138,.7);animation:dot 1.8s infinite}
+.live.closed i{background:#E0745B;animation:none}
+@keyframes dot{70%{box-shadow:0 0 0 10px rgba(91,211,138,0)}100%{box-shadow:0 0 0 0 rgba(91,211,138,0)}}
+#cursor{position:fixed;left:0;top:0;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;background:#F2B66D;mix-blend-mode:difference;pointer-events:none;z-index:200;transition:width .2s,height .2s,margin .2s;display:none}
+#cursor.big{width:60px;height:60px;margin:-30px 0 0 -30px}
+@media (hover:hover) and (pointer:fine){#cursor{display:block;opacity:0;transition:opacity .3s,width .2s,height .2s,margin .2s}#cursor.live{opacity:1}}
+.mbar{display:none;position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:60;gap:8px;padding:8px;border-radius:999px;background:rgba(11,20,16,.78);border:1px solid var(--gline);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:transform .35s,opacity .35s}
+.mbar .btn{flex:1;padding:14px 10px;font-size:14px}
+.mbar.hide{transform:translateY(130%);opacity:0;pointer-events:none}
+.call-fab{display:none;position:fixed;right:16px;bottom:16px;z-index:60;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#9A4A22,#A9552C);font-size:24px;place-items:center;box-shadow:0 10px 30px rgba(196,106,59,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(196,106,59,.6)}70%{box-shadow:0 0 0 18px rgba(196,106,59,0)}100%{box-shadow:0 0 0 0 rgba(196,106,59,0)}}
+
+/* 3D-появление при прокрутке */
+.reveal{opacity:0;transform:perspective(900px) rotateX(16deg) translateY(50px);transform-origin:50% 100%;transition:opacity .9s ease,transform 1s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.tilt.reveal.in{transition:transform .2s ease-out,opacity .9s ease}
+
+@media (max-width:900px){
+  section{padding:80px 0}
+  .nav ul{display:none}
+  .nav ul.open{display:flex;flex-direction:column;position:absolute;top:72px;left:4%;right:4%;background:rgba(11,20,16,.95);border:1px solid var(--gline);border-radius:22px;padding:22px;gap:18px;backdrop-filter:blur(18px)}
+  .burger{display:block;min-width:48px;min-height:48px}
+  .nav ul.open a{display:block;padding:13px 0;opacity:1;font-size:17px}
+  .nav ul.open{gap:0}
+  .nav ul.open li+li{border-top:1px solid var(--gline)}
+  .nav .btn{display:none}
+  .hero-grid{grid-template-columns:1fr}
+  .stage{order:-1;height:230px;margin:-10px 0 0}
+  .plate{width:230px}
+  .hero{padding-top:100px}
+  body{padding-bottom:96px}
+  .revs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding-bottom:10px;scrollbar-width:none}
+  .rev{flex:0 0 85%;scroll-snap-align:center}
+  .revs .reveal{opacity:1;transform:none}
+  .stats{gap:24px}
+  .cards,.revs{grid-template-columns:1fr}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-bottom:24px;padding-bottom:4px;max-width:100%}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:none;min-height:44px}
+  .seg{display:grid;grid-template-columns:repeat(3,1fr)}
+  .flips{grid-template-columns:1fr;gap:12px}
+  .flip{height:150px}
+  .front{flex-direction:row}
+  .front .art{height:100%;width:42%}
+  .front .art svg{width:92%;height:92%}
+  .front .txt{padding:14px 16px;justify-content:center;background:none}
+  .front h4{font-size:17px}
+  .front .badge{font-size:10px;left:8px;top:8px;padding:3px 8px}
+  .hint{top:8px!important;right:8px!important;width:28px;height:28px}
+  .back{padding:16px}
+  .back .price{font-size:26px}
+  .ring3d{height:340px}
+  .carousel{width:170px;height:240px}
+  .book,.contacts{grid-template-columns:1fr}
+  form{grid-template-columns:1fr;padding:24px}
+  .mbar{display:flex}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero h1 .w span,.hero p,.hero .btns,.stats{transform:none;opacity:1}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div><div id="cursor"></div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo">Корюшка <b>и</b> сыр</a>
+    <ul id="navlist">
+      <li><a href="#about">О нас</a></li>
+      <li><a href="#menu">Меню</a></li>
+      <li><a href="#gallery">Галерея</a></li>
+      <li><a href="#booking">Бронь</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+    <a href="#booking" class="btn btn-main mag">Забронировать</a>
+    <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="navlist">☰</button>
+  </div>
+</header>
+
+<section class="hero">
+  <canvas id="gl"></canvas>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="live" id="live"><i></i><span>Ежедневно 12:00–23:00</span></div>
+      <div class="eyebrow">Петроградская сторона</div>
+      <h1 id="title">Петербургская кухня <em>с характером</em></h1>
+      <p>Корюшка, северные сыры и хлеб из собственной пекарни. Уютный зал на 40 мест в пяти минутах от метро «Петроградская».</p>
+      <div class="btns">
+        <a href="#booking" class="btn btn-main mag">Забронировать стол →</a>
+        <a href="#menu" class="btn btn-glass mag">Смотреть меню</a>
+      </div>
+      <div class="stats">
+        <div><b data-count="4.9">0</b><span>рейтинг гостей (демо)</span></div>
+        <div><b data-count="40">0</b><span>мест в зале</span></div>
+        <div><b data-count="8">0</b><span>сортов местного сыра</span></div>
+      </div>
+    </div>
+    <div class="stage" id="stage">
+      <div class="plate" id="plate">
+        <div class="glow"></div>
+        <svg class="ring" viewBox="0 0 300 300" aria-hidden="true">
+          <defs><path id="circ" d="M150,150 m-132,0 a132,132 0 1,1 264,0 a132,132 0 1,1 -264,0"/></defs>
+          <text><textPath href="#circ" textLength="820" lengthAdjust="spacing">КОРЮШКА · СЫР · ХЛЕБ НА ЗАКВАСКЕ · ПЕТЕРБУРГ ·</textPath></text>
+        </svg>
+        <div class="dish"></div>
+        <div class="inner"></div>
+        <div class="food">
+          <svg viewBox="0 0 200 200" width="100%" aria-hidden="true">
+            <defs>
+              <linearGradient id="fish" x1="0" x2="1"><stop offset="0" stop-color="#E9B46E"/><stop offset=".6" stop-color="#C46A3B"/><stop offset="1" stop-color="#8A4424"/></linearGradient>
+              <radialGradient id="lemon"><stop offset="0" stop-color="#FFF3A6"/><stop offset="1" stop-color="#F2C94C"/></radialGradient>
+            </defs>
+            <g transform="rotate(-18 100 100)">
+              <path d="M30 95 C60 70,120 68,150 92 L178 74 L172 100 L178 126 L150 108 C120 132,60 130,30 105 Z" fill="url(#fish)"/>
+              <circle cx="48" cy="96" r="4" fill="#2a1a10"/>
+              <path d="M80 86 q8 14 0 28 M100 84 q8 16 0 32 M120 86 q8 14 0 28" stroke="#F6D19A" stroke-width="2" fill="none" opacity=".7"/>
+            </g>
+            <g transform="rotate(10 100 100)">
+              <path d="M40 140 C70 122,118 122,140 138 L160 126 L156 144 L162 160 L140 150 C118 164,70 162,40 148 Z" fill="url(#fish)" opacity=".92"/>
+              <circle cx="54" cy="143" r="3.5" fill="#2a1a10"/>
+            </g>
+            <circle cx="150" cy="52" r="20" fill="url(#lemon)"/>
+            <path d="M150 34 v36 M132 52 h36 M137 39 l26 26 M163 39 l-26 26" stroke="#fff8c9" stroke-width="2"/>
+            <circle cx="58" cy="50" r="6" fill="#6FA36B"/><circle cx="68" cy="44" r="5" fill="#88B884"/><circle cx="64" cy="58" r="5" fill="#5A8F57"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div>Корюшка весной<span>✦</span>Сыры Ленобласти<span>✦</span>Хлеб каждое утро<span>✦</span>Банкеты до 40 гостей<span>✦</span>Корюшка весной<span>✦</span>Сыры Ленобласти<span>✦</span>Хлеб каждое утро<span>✦</span>Банкеты до 40 гостей<span>✦</span></div></div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow reveal">О ресторане</div>
+    <h2 class="reveal">Вкус Петербурга —<br><em>без лишнего пафоса</em></h2>
+    <p class="lead reveal">Мы готовим то, что любят в нашем городе: рыбу из Ладоги и Финского залива, сыры местных сыроварен и простые блюда, которые хочется заказывать снова.</p>
+    <div class="cards">
+      <div class="tilt reveal"><span class="num">01</span><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M2 12c3-4 8-6 13-3l4-3v12l-4-3c-5 3-10 1-13-3z"/><circle cx="7" cy="11" r=".8"/></svg></div><h3>Свежая корюшка</h3><p>Весной — прямо от ладожских рыбаков. В остальное время года — ряпушка, судак и сиг.</p></div>
+      <div class="tilt reveal"><span class="num">02</span><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M3 17l9-11 9 11z"/><path d="M3 17v3h18v-3"/><circle cx="12" cy="13" r="1.5"/><circle cx="16" cy="15.5" r="1"/></svg></div><h3>Сыры Ленобласти</h3><p>Восемь видов сыра от небольших сыроварен — на тарелке, в салатах и горячем.</p></div>
+      <div class="tilt reveal"><span class="num">03</span><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M5 19c-2-2 0-6 4-10s8-6 10-4 0 6-4 10-8 6-10 4z"/><path d="M9 11l2 2M12 8l2 2M6 14l2 2"/></svg></div><h3>Хлеб каждое утро</h3><p>Печём сами на закваске. Тёплый хлеб с маслом — к каждому столу бесплатно.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="eyebrow reveal">Меню</div>
+    <h2 class="reveal">Что у нас <em>готовят</em></h2>
+    <p class="lead reveal">Нажмите на блюдо — на обороте состав и подробности. Цены в рублях.</p>
+    <div class="tabs" id="tabs"></div>
+    <div class="flips" id="flips"></div>
+    <div class="menu-cta">
+      <a href="menu.html" class="btn btn-glass mag">Меню для гостей</a>
+      <span>Это же меню открывается у гостей по коду на столе.</span>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="eyebrow reveal">Галерея</div>
+    <h2 class="reveal">Атмосфера <em>и блюда</em></h2>
+    <p class="lead reveal">Кирпичные стены, тёплый свет и большие окна на проспект.</p>
+  </div>
+  <div class="ring3d reveal" id="ring"><div class="carousel" id="carousel"></div></div>
+  <p class="ring-hint">← Проведите, чтобы покрутить →</p>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <div class="eyebrow reveal">Отзывы</div>
+    <h2 class="reveal">Что говорят <em>гости</em></h2>
+    <p class="lead reveal">Примеры отзывов для демонстрации макета.</p>
+    <div class="revs">
+      <div class="tilt rev reveal"><div class="stars">★★★★★</div><p>«Лучшая корюшка, которую я ел в Петербурге. Хрустящая, не жирная, и тартар идеальный.»</p><b>Пример отзыва · Андрей</b></div>
+      <div class="tilt rev reveal"><div class="stars">★★★★★</div><p>«Пришли с друзьями на сырную тарелку и остались на весь вечер. Очень тёплая атмосфера.»</p><b>Пример отзыва · Мария</b></div>
+      <div class="tilt rev reveal"><div class="stars">★★★★★</div><p>«Удобно, что меню можно открыть с телефона — сразу видно фото и цены.»</p><b>Пример отзыва · Ольга</b></div>
+    </div>
+  </div>
+</section>
+
+<section id="booking">
+  <div class="wrap book">
+    <div>
+      <div class="eyebrow reveal">Бронирование</div>
+      <h2 class="reveal">Забронируйте <em>стол</em></h2>
+      <p class="lead reveal">Оставьте заявку — администратор перезвонит в течение 15 минут и подтвердит бронь.</p>
+      <ul class="info reveal">
+        <li><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-4 3-6 6-6s6 2 6 6M15 20c0-3 1.5-5 4-5"/></svg>Банкеты и праздники — до 40 гостей, банкетное меню от 3 500 ₽ на гостя</li>
+        <li><svg viewBox="0 0 24 24"><path d="M4 11h16v9H4zM12 11v9M4 15h16M8 11c-2-3 1-6 4-3 3-3 6 0 4 3"/></svg>Десерт в подарок имениннику</li>
+        <li><svg viewBox="0 0 24 24"><path d="M5 9h14l-1 11H6zM9 9V6a3 3 0 0 1 6 0v3"/></svg>Еда с собой — скажите официанту</li>
+        <li><svg viewBox="0 0 24 24"><path d="M3 17h18M5 17l2-6h10l2 6M7 17v2M17 17v2"/><circle cx="8" cy="14" r=".6"/><circle cx="16" cy="14" r=".6"/></svg>Парковка во дворе</li>
+      </ul>
+    </div>
+    <form id="bookForm" class="reveal">
+      <label>Имя<input name="name" autocomplete="name" required placeholder="Как к вам обращаться"></label>
+      <label>Телефон<input name="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="[+0-9 ()\-]{10,}" required placeholder="+7 (___) ___-__-__"></label>
+      <label>Дата<input name="date" type="date" lang="ru" required></label>
+      <label>Время<select name="time" required>
+        <option value="">Выберите</option><option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option><option>18:00</option><option>19:00</option><option>20:00</option><option>21:00</option><option>22:00</option>
+      </select></label>
+      <div class="full"><label style="margin-bottom:8px">Количество гостей</label><div class="seg" id="seg"><button type="button">1</button><button type="button" class="on">2</button><button type="button">3</button><button type="button">4</button><button type="button">5–8</button><button type="button">9+</button></div><input type="hidden" name="guests" value="2"></div>
+      <label class="full">Комментарий<textarea name="comment" rows="3" placeholder="Например: столик у окна, день рождения"></textarea></label>
+      <label class="consent full"><input type="checkbox" required> <span>Согласен(на) на обработку персональных данных в соответствии с <a href="politika.html">политикой конфиденциальности</a></span></label>
+      <button class="btn btn-main full" type="submit">Отправить заявку</button>
+      <div class="ok" id="ok"></div>
+    </form>
+  </div>
+</section>
+
+<section id="contacts">
+  <div class="wrap contacts">
+    <div>
+      <div class="eyebrow reveal">Контакты</div>
+      <h2 class="reveal">Как нас <em>найти</em></h2>
+      <ul class="info reveal">
+        <li><svg viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Санкт-Петербург, Большой пр. П.С. (демо-адрес)</li>
+        <li><svg viewBox="0 0 24 24"><path d="M4 18L8 6l4 7 4-7 4 12"/></svg>5 минут от метро «Петроградская»</li>
+        <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Ежедневно с 12:00 до 23:00</li>
+        <li><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><a href="tel:+78120000000">+7 (812) 000-00-00</a></li>
+      </ul>
+      <div class="links reveal">
+        <a class="btn btn-glass" href="#">Телеграм</a>
+        <a class="btn btn-glass" href="#">ВКонтакте</a>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="mapbox"><iframe src="https://yandex.ru/map-widget/v1/?ll=30.3115%2C59.9665&z=15" title="Карта: ресторан на Петроградской" loading="lazy" allowfullscreen></iframe></div>
+      <a class="btn btn-main" style="margin-top:14px" href="https://yandex.ru/maps/?ll=30.3115%2C59.9665&z=16">Открыть на Яндекс Картах</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© «Корюшка и сыр» — вымышленный ресторан</span>
+    <span>Демо-проект студии <a href="#">«Ростра»</a> — сайты для бизнеса Петербурга</span>
+  </div>
+</footer>
+
+<nav class="mbar" id="mbar" aria-label="Быстрые действия"><a class="btn btn-glass" href="tel:+78120000000">Позвонить</a><a class="btn btn-main" href="#booking">Забронировать стол</a></nav>
+
+<script>
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const touch = matchMedia('(hover: none)').matches;
+
+/* ---------- живой фон (WebGL) ---------- */
+(function(){
+  const c=document.getElementById('gl'), gl=c.getContext('webgl');
+  if(!gl||reduce) return;
+  const vs=`attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}`;
+  const fs=`precision mediump float;uniform vec2 r;uniform float t;uniform vec2 m;
+  float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+  float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+    return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+  float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*n(p);p*=2.02;a*=.5;}return v;}
+  void main(){vec2 uv=gl_FragCoord.xy/r;vec2 p=uv*vec2(r.x/r.y,1.)*1.8+m*.25;
+    float q=fbm(p+t*.04);float w=fbm(p+q*2.2+vec2(t*.06,-t*.035));
+    vec3 col=mix(vec3(.035,.07,.055),vec3(.11,.22,.17),smoothstep(.25,.7,w));
+    col=mix(col,vec3(.77,.42,.23),smoothstep(.58,.88,w)*.8);
+    col=mix(col,vec3(.95,.71,.43),smoothstep(.8,.97,w)*.55);
+    col*=1.-length(uv-vec2(.6,.55))*.55;
+    gl_FragColor=vec4(col,1.);}`;
+  const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o};
+  const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);gl.useProgram(pr);
+  const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  const ur=gl.getUniformLocation(pr,'r'),ut=gl.getUniformLocation(pr,'t'),um=gl.getUniformLocation(pr,'m');
+  let mx=0,my=0,tx=0,ty=0,vis=true;
+  addEventListener('pointermove',e=>{tx=e.clientX/innerWidth-.5;ty=e.clientY/innerHeight-.5});
+  let raf=null;const go=()=>{if(!raf&&vis)raf=requestAnimationFrame(loop)};
+  new IntersectionObserver(([e])=>{vis=e.isIntersecting;go()}).observe(c);
+  document.addEventListener('visibilitychange',()=>{vis=!document.hidden;go()});
+  function size(){const d=Math.min(devicePixelRatio,1.5);c.width=c.clientWidth*d*.6;c.height=c.clientHeight*d*.6;gl.viewport(0,0,c.width,c.height)}
+  size();addEventListener('resize',size);
+  const t0=performance.now();
+  function loop(now){raf=null;if(!vis)return;
+    mx+=(tx-mx)*.04;my+=(ty-my)*.04;
+    gl.uniform2f(ur,c.width,c.height);gl.uniform1f(ut,(now-t0)/1000);gl.uniform2f(um,mx,-my);
+    gl.drawArrays(gl.TRIANGLE_STRIP,0,4);raf=requestAnimationFrame(loop);}
+  go();
+})();
+
+/* ---------- заголовок по словам ---------- */
+(function(){
+  const h=document.getElementById('title');let i=0;
+  const wrap=node=>node.textContent.split(' ').filter(Boolean).map(w=>`<span class="w"><span style="animation-delay:${.15+(i++)*.09}s">${w}</span></span>`).join(' ');
+  const em=h.querySelector('em');const emHTML=wrap(em);em.remove();
+  h.innerHTML=wrap(h)+' <em>'+emHTML+'</em>';
+})();
+
+/* ---------- 3D-тарелка следует за курсором ---------- */
+(function(){
+  const plate=document.getElementById('plate');if(reduce)return;let pv=true,raf=null;const go=()=>{if(!raf&&pv)raf=requestAnimationFrame(loop)};new IntersectionObserver(([e])=>{pv=e.isIntersecting;go()}).observe(plate);
+  let rx=52,rz=0,trx=52,trz=0;
+  addEventListener('pointermove',e=>{const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;trx=52-y*30;trz=x*40});
+  function loop(t){raf=null;if(!pv)return;raf=requestAnimationFrame(loop);
+    if(touch){trx=52+Math.sin(t/1400)*10;trz=Math.sin(t/2000)*18}
+    const s=scrollY/innerHeight;rx+=(trx+s*25-rx)*.06;rz+=(trz-rz)*.06;
+    plate.style.transform=`rotateX(${rx}deg) rotateZ(${rz}deg)`;}
+  go();
+})();
+
+/* ---------- счётчики ---------- */
+document.querySelectorAll('[data-count]').forEach(el=>{
+  const end=parseFloat(el.dataset.count),dec=end%1?1:0,t0=performance.now()+1300;
+  (function f(now){const k=Math.min(Math.max((now-t0)/1400,0),1),e=1-Math.pow(1-k,3);
+    el.textContent=(end*e).toFixed(dec).replace('.',',');if(k<1)requestAnimationFrame(f)})(t0);
+});
+
+/* ---------- 3D-наклон карточек ---------- */
+function bindTilt(el){
+  if(touch||reduce)return;
+  el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+    el.style.transform=`perspective(900px) rotateY(${(x-.5)*16}deg) rotateX(${(.5-y)*16}deg) translateZ(10px)`;
+    el.style.setProperty('--gx',x*100+'%');el.style.setProperty('--gy',y*100+'%');});
+  el.addEventListener('pointerleave',()=>el.style.transform='');
+}
+document.querySelectorAll('.tilt').forEach(bindTilt);
+
+/* ---------- магнитные кнопки ---------- */
+if(!touch&&!reduce)document.querySelectorAll('.mag').forEach(b=>{
+  b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.25}px,${(e.clientY-r.top-r.height/2)*.35}px)`});
+  b.addEventListener('pointerleave',()=>b.style.transform='');
+});
+
+/* ---------- иллюстрации и меню (из src/, собирает build.py) ---------- */
+/*@LIB*/
+/* Иллюстрации блюд и интерьера (SVG). Если есть фото img/*.jpg — оно ложится поверх. */
+const ART=(()=>{
+const S=(id,body,vb='0 0 200 200')=>`<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice">${body}</svg>`;
+const plate=(id,r=80,cx=100,cy=104)=>`<defs><radialGradient id="${id}p" cx=".4" cy=".35"><stop offset="0" stop-color="#FFFDF8"/><stop offset=".7" stop-color="#EEE6D8"/><stop offset="1" stop-color="#D6CBB8"/></radialGradient><radialGradient id="${id}i" cx=".45" cy=".4"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F1EADF"/></radialGradient></defs><ellipse cx="${cx+6}" cy="${cy+10}" rx="${r}" ry="${r*.96}" fill="#000" opacity=".35"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#${id}p)"/><circle cx="${cx}" cy="${cy}" r="${r*.72}" fill="url(#${id}i)" stroke="#E2D8C6" stroke-width="1.2"/>`;
+const bowl=(id,c1,c2,cx=100,cy=104,r=70)=>`<defs><radialGradient id="${id}b" cx=".45" cy=".4"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></radialGradient></defs><ellipse cx="${cx+6}" cy="${cy+10}" rx="${r+8}" ry="${r+6}" fill="#000" opacity=".35"/><circle cx="${cx}" cy="${cy}" r="${r+8}" fill="#F3ECE0"/><circle cx="${cx}" cy="${cy}" r="${r+8}" fill="none" stroke="#D9CDB8" stroke-width="2"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#${id}b)"/>`;
+const fish=(x,y,s,rot,id)=>`<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})"><path d="M-46 0C-30-14 10-15 30-5L46-15 42 0 46 15 30 5C10 15-30 14-46 0Z" fill="url(#${id}f)"/><path d="M-20-9q5 9 0 18M-6-11q6 11 0 22M8-10q5 10 0 20" stroke="#F7D9A2" stroke-width="1.6" fill="none" opacity=".75"/><circle cx="-36" cy="-2" r="2.4" fill="#3A2412"/></g>`;
+const fishDef=id=>`<defs><linearGradient id="${id}f" x1="0" x2="1"><stop offset="0" stop-color="#F0C27A"/><stop offset=".55" stop-color="#D2843F"/><stop offset="1" stop-color="#9A5226"/></linearGradient></defs>`;
+const lemon=(x,y,r=16)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#F6D45C"/><circle cx="${x}" cy="${y}" r="${r-3}" fill="#FFF0A8"/><path d="M${x} ${y-r+3}V${y+r-3}M${x-r+3} ${y}H${x+r-3}M${x-9} ${y-9}l18 18M${x+9} ${y-9}l-18 18" stroke="#F6D45C" stroke-width="1.5"/>`;
+const herb=(x,y)=>`<g fill="#6E9E5E"><ellipse cx="${x}" cy="${y}" rx="6" ry="3" transform="rotate(-30 ${x} ${y})"/><ellipse cx="${x+7}" cy="${y-5}" rx="5" ry="2.6" transform="rotate(20 ${x+7} ${y-5})"/><ellipse cx="${x+3}" cy="${y+6}" rx="5" ry="2.4" fill="#86B573" transform="rotate(60 ${x+3} ${y+6})"/></g>`;
+const dill=(x,y,rot=0)=>`<g transform="translate(${x} ${y}) rotate(${rot})" stroke="#5E9150" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M0 0v-18M0-6l-6-6M0-10l6-6M0-14l-5-5M0-3l5-4"/></g>`;
+const A={};
+A.koryushka=()=>S('k',fishDef('k')+plate('k')+fish(96,86,.95,-12,'k')+fish(104,112,.95,-4,'k')+fish(92,136,.85,6,'k')+lemon(148,78)+`<ellipse cx="62" cy="80" rx="13" ry="10" fill="#F4EEDC" stroke="#E0D3B6"/><path d="M56 78q6 4 12 0" stroke="#6E9E5E" stroke-width="2" fill="none"/>`+herb(140,140));
+A.tartar=()=>S('t',plate('t')+`<ellipse cx="100" cy="108" rx="36" ry="34" fill="#000" opacity=".12"/><circle cx="98" cy="102" r="34" fill="#E9876A"/>`+[[86,92],[104,88],[112,104],[94,110],[82,106],[100,118],[116,92]].map(([x,y],i)=>`<rect x="${x}" y="${y}" width="10" height="10" rx="2" fill="${i%2?'#F2A387':'#D96C52'}" transform="rotate(${i*17} ${x+5} ${y+5})"/>`).join('')+`<circle cx="98" cy="102" r="10" fill="#F6E9A8"/><circle cx="98" cy="102" r="5" fill="#F2C94C"/>`+[0,1,2,3].map(i=>`<circle cx="${52+i*4}" cy="${70+i*20}" r="9" fill="#BFD9A8" stroke="#7BA463" stroke-width="2"/>`).join('')+`<rect x="128" y="130" width="34" height="18" rx="4" fill="#7A4A2A" transform="rotate(-20 145 139)"/><rect x="132" y="114" width="34" height="18" rx="4" fill="#94603A" transform="rotate(-8 149 123)"/>`+dill(104,78,10));
+A.cheese=()=>S('c',`<ellipse cx="106" cy="114" rx="88" ry="72" fill="#000" opacity=".35"/><rect x="18" y="40" width="166" height="128" rx="22" fill="#A8743F"/><rect x="18" y="40" width="166" height="128" rx="22" fill="none" stroke="#7E5229" stroke-width="3"/><path d="M30 70h140M30 100h140M30 130h140" stroke="#96652F" stroke-width="2" opacity=".6"/><path d="M40 120l44-38 10 46z" fill="#F4D27A"/><path d="M40 120l44-38 4 18z" fill="#F9E3A4"/><circle cx="66" cy="114" r="4" fill="#E2B653"/><circle cx="80" cy="104" r="3" fill="#E2B653"/><rect x="104" y="62" width="48" height="34" rx="4" fill="#FBF3E0"/><path d="M104 66h48" stroke="#E8D9B4" stroke-width="4"/><path d="M112 108l40-6 4 30-40 6z" fill="#E8A951"/><path d="M112 108l40-6v6l-40 6z" fill="#C9823A"/><circle cx="160" cy="146" r="14" fill="#C77A2E"/><circle cx="160" cy="146" r="10" fill="#E9A23B"/>`+[[60,148],[74,152],[88,146],[100,154]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="7" ry="5" fill="#B9874E" stroke="#8C5E2E"/>`).join('')+`<circle cx="166" cy="70" r="7" fill="#7B2F48"/><circle cx="158" cy="78" r="7" fill="#8E3A57"/><circle cx="170" cy="82" r="7" fill="#6A2840"/>`,'0 0 200 200');
+A.beet=()=>S('b',plate('b')+`<path d="M60 90c20-30 60-36 84-10" stroke="#8DBB6E" stroke-width="10" stroke-linecap="round" fill="none" opacity=".9"/>`+[[80,100,18],[112,96,16],[96,124,17],[126,124,13],[70,128,12]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#8E2246"/><circle cx="${x-4}" cy="${y-4}" r="${r*.45}" fill="#B23A62" opacity=".7"/>`).join('')+[[92,100],[106,112],[84,116],[118,108],[100,90],[112,132]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="#FBF6EA"/>`).join('')+[[74,84],[132,90],[120,140],[78,142]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="5" ry="4" fill="#C08A4E"/>`).join(''));
+A.sudak=()=>S('s',plate('s')+`<path d="M58 132c18-30 70-34 92-14" stroke="#EADFC9" stroke-width="22" stroke-linecap="round" fill="none"/><path d="M58 132c18-30 70-34 92-14" stroke="#F6EFE1" stroke-width="12" stroke-linecap="round" fill="none"/><path d="M60 100c4-24 70-32 86-10 6 12-6 22-42 24s-48 2-44-14z" fill="#000" opacity=".1" transform="translate(3 4)"/><path d="M60 100c4-24 70-32 86-10 6 12-6 22-42 24s-48 2-44-14z" fill="#E9C48A"/><path d="M64 98c6-18 62-24 78-6" stroke="#C47C34" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M70 106c20 4 50 2 70-6" stroke="#F6E7C8" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/><path d="M74 92c10-8 44-12 58-4" stroke="#B87A35" stroke-width="2" fill="none" opacity=".6"/>`+[[60,120],[150,116],[140,140],[70,146]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="#E07A4F"/>`).join('')+`<path d="M120 128c10-6 20-4 26 2" stroke="#9C6B3A" stroke-width="4" fill="none" stroke-linecap="round"/>`+dill(126,86,30)+dill(84,88,-20));
+A.shchi=()=>S('sh',bowl('sh','#E8955C','#B85A30')+[[78,90],[110,82],[124,110],[86,120],[100,104]].map(([x,y],i)=>`<path d="M${x} ${y}q14 ${i%2?6:-6} 26 0" stroke="#F3E3B0" stroke-width="4" fill="none" stroke-linecap="round"/>`).join('')+`<rect x="96" y="108" width="26" height="20" rx="6" fill="#6B3420"/><rect x="99" y="110" width="20" height="6" rx="3" fill="#8A4A30"/><ellipse cx="80" cy="84" rx="14" ry="10" fill="#FFFDF6"/>`+dill(126,92,20)+dill(70,118,-30)+`<circle cx="122" cy="76" r="3" fill="#F6E9C0" opacity=".6"/><circle cx="74" cy="104" r="2.5" fill="#F6E9C0" opacity=".6"/>`);
+A.pelmeni=()=>S('pe',plate('pe')+[[70,92,-20],[100,80,0],[130,92,20],[66,122,-30],[96,112,5],[126,124,25],[96,142,-5]].map(([x,y,r])=>`<g transform="translate(${x} ${y}) rotate(${r})"><ellipse cx="2" cy="4" rx="16" ry="10" fill="#000" opacity=".12"/><path d="M-15 2c0-12 30-12 30 0 0 6-30 6-30 0z" fill="#F7EEDC"/><path d="M-13 0c4 4 22 4 26 0" stroke="#E4D3B2" stroke-width="2" fill="none"/></g>`).join('')+`<ellipse cx="140" cy="148" rx="16" ry="12" fill="#FFFFFF" stroke="#EDE5D4"/>`+dill(144,140,10)+herb(60,150));
+A.perlovka=()=>S('pr',bowl('pr','#E9D9B4','#C9AF7E')+Array.from({length:60},(_,i)=>{const a=i*2.4,r=8+(i%10)*5.6;return `<ellipse cx="${(100+Math.cos(a)*r).toFixed(1)}" cy="${(104+Math.sin(a)*r).toFixed(1)}" rx="3.2" ry="2.2" fill="${i%3?'#F4E8CC':'#D9C397'}"/>`}).join('')+[[82,94,0],[116,98,30],[98,122,-20]].map(([x,y,r])=>`<g transform="translate(${x} ${y}) rotate(${r})"><path d="M-12 0a12 9 0 0 1 24 0z" fill="#8A5A34"/><rect x="-4" y="0" width="8" height="12" rx="3" fill="#EAD8B6"/></g>`).join('')+dill(120,124,20));
+A.medovik=()=>S('m',plate('m',80)+`<g transform="translate(100 106)"><path d="M-50 18L0-40 50 18z" fill="#000" opacity=".12" transform="translate(5 6)"/><path d="M-50 16L0-42 50 16v20H-50z" fill="#E5B26A"/>`+[0,1,2,3,4].map(i=>`<rect x="-50" y="${16+i*4}" width="100" height="2" fill="${i%2?'#FBEBC8':'#C98A3E'}"/>`).join('')+`<path d="M-50 16L0-42 50 16z" fill="#D59A4C"/><path d="M-50 16L0-42" stroke="#B57A30" stroke-width="2"/>`+[[-14,-8],[4,-16],[14,4],[-26,8],[0,8]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2.2" fill="#F6DFA8"/>`).join('')+`</g>`+herb(150,70));
+A.syrniki=()=>S('sy',plate('sy')+[[78,92],[118,90],[98,124]].map(([x,y])=>`<g><ellipse cx="${x+3}" cy="${y+5}" rx="24" ry="20" fill="#000" opacity=".12"/><ellipse cx="${x}" cy="${y}" rx="24" ry="20" fill="#E8AE5C"/><ellipse cx="${x-2}" cy="${y-2}" rx="17" ry="13" fill="#F3C783"/></g>`).join('')+`<ellipse cx="138" cy="136" rx="17" ry="13" fill="#FFFFFF" stroke="#EDE5D4"/>`+[[64,136],[70,142],[60,144],[150,70],[144,64]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="#C32D3E"/>`).join('')+`<path d="M90 70c6-10 20-12 28-4" stroke="#FFFFFF" stroke-width="3" fill="none" opacity=".6"/>`);
+A.kartoshka=()=>S('ka',plate('ka')+[[82,96,-20],[118,98,15],[100,128,0]].map(([x,y,r])=>`<g transform="translate(${x} ${y}) rotate(${r})"><ellipse cx="3" cy="5" rx="22" ry="15" fill="#000" opacity=".14"/><ellipse rx="22" ry="15" fill="#5A3420"/><ellipse cx="-4" cy="-4" rx="12" ry="7" fill="#74462B"/>`+[[-10,-2],[6,-6],[10,4],[-4,6],[0,0]].map(([a,b])=>`<circle cx="${a}" cy="${b}" r="1.6" fill="#C9A27A"/>`).join('')+`<circle cx="-14" cy="-1" r="3.5" fill="#F7F1E6"/><circle cx="-8" cy="-2" r="3" fill="#F7F1E6"/></g>`).join('')+herb(150,140));
+A.icecream=()=>S('ic',bowl('ic','#F3EDE2','#DCCFB8')+`<circle cx="88" cy="100" r="26" fill="#F8EEDB"/><circle cx="82" cy="94" r="10" fill="#FFFFFF" opacity=".6"/><circle cx="116" cy="114" r="26" fill="#F2DFC0"/><circle cx="110" cy="108" r="9" fill="#FFFFFF" opacity=".5"/>`+[[96,88],[104,120],[124,100],[78,118],[110,96]].map(([x,y])=>`<path d="M${x} ${y}l6-2 2 6-6 2z" fill="#C0803E"/>`).join('')+`<path d="M70 126c20 10 50 10 70-4" stroke="#C0803E" stroke-width="3" fill="none" stroke-linecap="round"/>`);
+const glass=(id,c1,c2,extra='')=>S(id,`<defs><linearGradient id="${id}g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs><ellipse cx="104" cy="170" rx="44" ry="10" fill="#000" opacity=".35"/><path d="M66 40h68l-8 128H74z" fill="#FFFFFF" opacity=".12" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="2"/><path d="M70 70h60l-6 94H76z" fill="url(#${id}g)"/>${extra}<path d="M78 46l-4 116" stroke="#FFFFFF" stroke-width="4" opacity=".35" stroke-linecap="round"/>`);
+A.mors=()=>glass('mo','#E0475C','#8E1A2E',`<rect x="84" y="78" width="16" height="16" rx="3" fill="#FFFFFF" opacity=".45" transform="rotate(12 92 86)"/><rect x="104" y="90" width="14" height="14" rx="3" fill="#FFFFFF" opacity=".4" transform="rotate(-10 111 97)"/><circle cx="118" cy="62" r="6" fill="#C32D3E"/><circle cx="110" cy="58" r="6" fill="#D93A4C"/>`+dill(124,58,30));
+A.kvas=()=>glass('kv','#B8743A','#5E3416',`<path d="M70 70c8-10 52-10 60 0v6H70z" fill="#F1DEB8"/><circle cx="90" cy="110" r="2" fill="#F6D9A0" opacity=".7"/><circle cx="108" cy="130" r="2" fill="#F6D9A0" opacity=".7"/><circle cx="100" cy="96" r="1.6" fill="#F6D9A0" opacity=".7"/>`);
+A.tea=()=>S('te',`<ellipse cx="104" cy="168" rx="70" ry="12" fill="#000" opacity=".35"/><path d="M48 96c0-34 104-34 104 0v34c0 24-104 24-104 0z" fill="#F3EDE2"/><path d="M48 104c0 4 104 4 104 0" stroke="#C46A3B" stroke-width="6"/><path d="M152 104c22-6 30 10 16 22l-16 10" stroke="#F3EDE2" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M48 112c-18-4-28 6-30 14" stroke="#F3EDE2" stroke-width="9" fill="none" stroke-linecap="round"/><ellipse cx="100" cy="68" rx="30" ry="6" fill="#E0D6C4"/><circle cx="100" cy="58" r="8" fill="#C46A3B"/>`+[[76,136],[96,144],[118,138]].map(([x,y])=>`<path d="M${x} ${y}l6-4 3 6-6 3z" fill="#8E3A57" opacity=".8"/>`).join('')+`<path d="M86 40c-6-8 6-12 0-20M104 40c-6-8 6-12 0-20" stroke="#FFFFFF" stroke-width="2" fill="none" opacity=".4" stroke-linecap="round"/>`);
+A.coffee=()=>S('co',`<ellipse cx="106" cy="112" rx="78" ry="74" fill="#000" opacity=".35"/><circle cx="100" cy="104" r="78" fill="#F3EDE2"/><circle cx="100" cy="104" r="60" fill="#FFFFFF"/><path d="M160 98c22-4 30 16 10 22" stroke="#FFFFFF" stroke-width="10" fill="none"/><circle cx="100" cy="104" r="48" fill="#8A5A34"/><circle cx="100" cy="104" r="44" fill="#B98455"/><path d="M100 90c-10-14-30-2-20 12l20 20 20-20c10-14-10-26-20-12z" fill="#F6EBD6"/><circle cx="100" cy="104" r="44" fill="none" stroke="#7A4A28" stroke-width="2" opacity=".5"/>`);
+A.bread=()=>S('br',`<ellipse cx="106" cy="134" rx="80" ry="30" fill="#000" opacity=".35"/><rect x="20" y="118" width="164" height="40" rx="12" fill="#8A5B34"/><path d="M28 120c0-56 144-56 144 0z" fill="#C98A47"/><path d="M28 120c0-56 144-56 144 0" fill="none" stroke="#9B6230" stroke-width="3"/><path d="M60 98q14-16 26 2M88 86q14-16 26 2M118 92q14-16 26 2" stroke="#F1D19C" stroke-width="5" fill="none" stroke-linecap="round"/>`+Array.from({length:18},(_,i)=>`<circle cx="${40+((i*37)%124)}" cy="${102+((i*13)%16)}" r="1.4" fill="#F4E2BE" opacity=".8"/>`).join('')+`<rect x="136" y="128" width="40" height="18" rx="4" fill="#F7E7A8"/><rect x="136" y="128" width="40" height="6" rx="3" fill="#FBF0C6"/>`);
+A.hall=()=>S('ha',`<defs><linearGradient id="hag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A2219"/><stop offset="1" stop-color="#20140F"/></linearGradient><radialGradient id="hal" cx=".5" cy=".3" r=".6"><stop offset="0" stop-color="#F2B66D" stop-opacity=".55"/><stop offset="1" stop-color="#F2B66D" stop-opacity="0"/></radialGradient></defs><rect width="300" height="200" fill="url(#hag)"/>`+Array.from({length:10},(_,r)=>Array.from({length:9},(_,c)=>`<rect x="${c*36-(r%2)*18}" y="${r*14}" width="34" height="12" rx="1.5" fill="#6B3424" opacity="${.35+((r*7+c*3)%5)*.08}"/>`).join('')).join('')+`<path d="M110 132V64a40 40 0 0 1 80 0v68z" fill="#1B2B3E"/><path d="M110 132V64a40 40 0 0 1 80 0v68z" fill="none" stroke="#C9A06A" stroke-width="4"/><path d="M150 26v106M110 86h80" stroke="#C9A06A" stroke-width="3"/><circle cx="170" cy="50" r="5" fill="#F6E3B0" opacity=".8"/><rect y="150" width="300" height="50" fill="#2A1A12"/>`+[60,150,240].map(x=>`<g><line x1="${x}" y1="0" x2="${x}" y2="34" stroke="#C9A06A" stroke-width="1.5"/><path d="M${x-12} 34h24l-6 10h-12z" fill="#C9A06A"/><circle cx="${x}" cy="46" r="40" fill="url(#hal)"/></g>`).join('')+[[50,150],[150,154],[250,150]].map(([x,y])=>`<g><ellipse cx="${x}" cy="${y}" rx="40" ry="9" fill="#5C3A22"/><rect x="${x-3}" y="${y}" width="6" height="34" fill="#4A2E1B"/><circle cx="${x-14}" cy="${y-4}" r="4" fill="#F6EEDF"/><circle cx="${x+12}" cy="${y-3}" r="4" fill="#F6EEDF"/><rect x="${x-1}" y="${y-14}" width="2" height="10" fill="#F2B66D"/></g>`).join(''),'0 0 300 200');
+A.window=()=>S('wi',`<defs><linearGradient id="wis" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A3B5E"/><stop offset="1" stop-color="#C46A3B"/></linearGradient></defs><rect width="200" height="260" fill="#241610"/><path d="M40 230V90a60 60 0 0 1 120 0v140z" fill="url(#wis)"/><path d="M40 190h120" stroke="#1A120D" stroke-width="2"/><path d="M40 196l20-8 14 4 18-12 20 10 16-6 32 10v36H40z" fill="#14100E"/><circle cx="130" cy="84" r="10" fill="#F6E3B0" opacity=".85"/><path d="M40 230V90a60 60 0 0 1 120 0v140z" fill="none" stroke="#C9A06A" stroke-width="5"/><path d="M100 30v200M40 130h120" stroke="#C9A06A" stroke-width="3"/><rect x="20" y="226" width="160" height="34" fill="#3A2417"/><ellipse cx="72" cy="226" rx="16" ry="4" fill="#5C3A22"/><path d="M66 206h12l-2 20h-8z" fill="#F6EEDF" opacity=".25" stroke="#F6EEDF" stroke-opacity=".6"/><path d="M68 214h8l-1 12h-6z" fill="#8E1A2E"/><rect x="120" y="212" width="4" height="14" fill="#F6EEDF"/><path d="M122 206q3 3 0 6q-3-3 0-6z" fill="#F2B66D"/>`,'0 0 200 260');
+A.banquet=()=>S('bq',`<defs><radialGradient id="bql" cx=".5" cy=".2" r=".7"><stop offset="0" stop-color="#F2B66D" stop-opacity=".5"/><stop offset="1" stop-color="#F2B66D" stop-opacity="0"/></radialGradient></defs><rect width="200" height="260" fill="#1F2A22"/><rect width="200" height="260" fill="url(#bql)"/>`+[30,70,110,150,190].map(x=>`<circle cx="${x-10}" cy="${20+(x%3)*6}" r="3" fill="#F6E3B0"/><path d="M${x-10} 0V${18+(x%3)*6}" stroke="#F6E3B0" stroke-width=".8" opacity=".6"/>`).join('')+`<path d="M10 150h180l-20 40H30z" fill="#F3ECE0"/><rect x="30" y="190" width="140" height="70" fill="#E6DCC9"/>`+[50,82,118,150].map(x=>`<ellipse cx="${x}" cy="160" rx="13" ry="5" fill="#FFFFFF"/><path d="M${x-3} 140h6l-1 14h-4z" fill="#FFFFFF" opacity=".5" stroke="#FFFFFF" stroke-opacity=".7"/>`).join('')+`<rect x="96" y="120" width="8" height="30" rx="2" fill="#F6EEDF"/><path d="M100 112q5 5 0 9q-5-4 0-9z" fill="#F2B66D"/>`,'0 0 200 260');
+A.evening=()=>A.window();
+return A;})();
+
+/* Единый источник меню для index.html и menu.html. Правьте только здесь, затем запустите сборку (build.py).
+   Поля: n — название, d — описание, p — цена ₽, v — вегетарианское, on — в наличии,
+   img — фото (необязательно), art — иллюстрация, badge — метка, more — выход, состав, аллергены */
+const MENU={
+ "Закуски":[
+  {n:"Корюшка в хрустящей панировке",d:"С соусом тартар и лимоном",p:790,v:0,on:1,img:"img/2.jpg",art:"koryushka",badge:"Хит сезона",more:"200 г · корюшка, мука, яйцо, соус тартар · аллергены: рыба, глютен, яйцо"},
+  {n:"Тартар из ряпушки",d:"Огурец, укроп, ржаные гренки",p:750,v:0,on:1,img:"",art:"tartar",badge:"",more:"160 г · ряпушка, огурец, желток, укроп, ржаной хлеб · аллергены: рыба, глютен, яйцо"},
+  {n:"Сырная тарелка «Северная»",d:"Пять сыров Ленобласти, мёд, орехи",p:980,v:1,on:1,img:"img/3.jpg",art:"cheese",badge:"На компанию",more:"300 г · пять сыров, мёд, грецкий орех, виноград · аллергены: молоко, орехи"},
+  {n:"Салат с печёной свёклой",d:"Козий сыр, фундук, руккола",p:590,v:1,on:1,img:"",art:"beet",badge:"",more:"220 г · свёкла, козий сыр, фундук, руккола · аллергены: молоко, орехи"}
+ ],
+ "Горячее":[
+  {n:"Судак с пюре из сельдерея",d:"Раковый соус, печёный лук",p:1290,v:0,on:1,img:"img/4.jpg",art:"sudak",badge:"Выбор шефа",more:"320 г · судак, сельдерей, сливки, раковый соус · аллергены: рыба, ракообразные, молоко"},
+  {n:"Щи из квашеной капусты",d:"С томлёной говяжьей щекой",p:520,v:0,on:1,img:"",art:"shchi",badge:"",more:"350 г · квашеная капуста, говяжья щека, сметана · аллергены: молоко"},
+  {n:"Пельмени с олениной",d:"Домашняя сметана, зелень",p:790,v:0,on:1,img:"",art:"pelmeni",badge:"",more:"250 г · оленина, тесто, сметана, укроп · аллергены: глютен, яйцо, молоко"},
+  {n:"Перловка с белыми грибами",d:"Сливочный соус, сыр",p:640,v:1,on:1,img:"",art:"perlovka",badge:"",more:"280 г · перловка, белые грибы, сливки, сыр · аллергены: глютен, молоко"}
+ ],
+ "Десерты":[
+  {n:"Медовик",d:"По бабушкиному рецепту",p:420,v:1,on:1,img:"img/5.jpg",art:"medovik",badge:"Хит",more:"150 г · мёд, мука, сметанный крем · аллергены: глютен, яйцо, молоко"},
+  {n:"Сырники",d:"Сметана и брусничное варенье",p:450,v:1,on:1,img:"",art:"syrniki",badge:"",more:"200 г · творог, яйцо, мука, брусника · аллергены: молоко, яйцо, глютен"},
+  {n:"Пирожное «Картошка»",d:"С тёмным шоколадом",p:350,v:1,on:1,img:"",art:"kartoshka",badge:"",more:"120 г · бисквит, какао, тёмный шоколад · аллергены: глютен, молоко, яйцо"},
+  {n:"Мороженое из ряженки",d:"С карамелизованными орехами",p:320,v:1,on:1,img:"",art:"icecream",badge:"",more:"130 г · ряженка, сливки, карамель, орехи · аллергены: молоко, орехи"}
+ ],
+ "Напитки":[
+  {n:"Морс клюквенный",d:"0,5 л",p:290,v:1,on:1,img:"",art:"mors",badge:"",more:"500 мл · клюква, вода, сахар"},
+  {n:"Иван-чай с чабрецом",d:"Чайник 0,6 л",p:380,v:1,on:1,img:"",art:"tea",badge:"",more:"600 мл · иван-чай, чабрец, мёд по желанию"},
+  {n:"Квас домашний",d:"0,5 л",p:260,v:1,on:1,img:"",art:"kvas",badge:"",more:"500 мл · ржаной солод, вода, сахар · аллергены: глютен"},
+  {n:"Капучино",d:"Молоко на выбор: обычное или овсяное",p:280,v:1,on:1,img:"",art:"coffee",badge:"",more:"300 мл · эспрессо, молоко · аллергены: молоко (есть овсяное)"}
+ ]
+};
+/* Фото ставится только если файл реально загрузился — без запросов 404 в консоли */
+const PHOTOS=/*@PHOTOS*/[]/*@END*/; // заполняет build.py по содержимому папки img/
+const PHOTO=(el,src)=>{if(!src||!PHOTOS.includes(src))return;const i=new Image();i.onload=()=>{el.style.backgroundImage=`url(${src})`;el.classList.add('has')};i.src=src;};
+const fillPhotos=root=>root.querySelectorAll('[data-photo]').forEach(el=>PHOTO(el,el.dataset.photo));
+
+/*@END-LIB*/
+/* ---------- меню с переворотом ---------- */
+
+const tabs=document.getElementById('tabs'),flips=document.getElementById('flips'),fmt=n=>n.toLocaleString('ru-RU')+' ₽';
+function show(cat){
+  [...tabs.children].forEach(b=>b.classList.toggle('on',b.textContent===cat));
+  flips.innerHTML=MENU[cat].map((m,i)=>`
+   <div class="flip${m.on?'':' off'}" role="button" tabindex="0" aria-label="${m.n}: состав и подробности" style="animation-delay:${i*.08}s" onclick="this.classList.toggle('on')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('on')}">
+    <div class="flip-in">
+     <div class="face front">
+      <div class="art">${ART[m.art]().replace('slice','meet')}<div class="photo" data-photo="${m.img}"></div>${m.badge?`<span class="badge">${m.badge}</span>`:''}<span class="hint" aria-hidden="true">↻</span></div>
+      <div class="txt"><h4>${m.n}</h4>${m.v?'<span class="tag">🌿 вегетарианское</span>':''}<p class="desc">${m.d}</p><div class="price">${fmt(m.p)}${m.on?'':' <small class="na">нет в наличии</small>'}</div></div></div>
+     <div class="face back"><h4>${m.n}</h4><p class="more">${m.more.split(' · ').map(x=>`<span>${x.replace(/^аллергены:/,'<b>Аллергены:</b>')}</span>`).join('')}</p><div class="price">${fmt(m.p)}</div>${m.v?'<p class="veg">🌿 Вегетарианское блюдо</p>':''}</div>
+    </div></div>`).join('');
+  fillPhotos(flips);
+}
+Object.keys(MENU).forEach(c=>{const b=document.createElement('button');b.className='tab';b.textContent=c;b.onclick=()=>show(c);tabs.appendChild(b)});
+show('Закуски');
+
+/* ---------- 3D-карусель ---------- */
+(function(){
+  const items=[["Наш зал","img/1.jpg","hall"],["Корюшка","img/2.jpg","koryushka"],["Сырная тарелка","img/3.jpg","cheese"],["Судак","img/4.jpg","sudak"],["Медовик","img/5.jpg","medovik"],["Хлеб на закваске","img/6.jpg","bread"],["Вечер у окна","img/7.jpg","window"],["Банкетный зал","img/8.jpg","banquet"]];
+  const car=document.getElementById('carousel'),ring=document.getElementById('ring'),N=items.length,step=360/N;
+  car.innerHTML=items.map(([t,img,key])=>`<div class="slide"><div class="slide-art">${ART[key]()}</div><div class="photo" data-photo="${img}"></div><span>${t}</span></div>`).join('');fillPhotos(car);
+  const slides=[...car.children];let rv=false,raf=null;const go=()=>{if(!raf&&rv)raf=requestAnimationFrame(loop)};new IntersectionObserver(([e])=>{rv=e.isIntersecting;go()}).observe(ring);let ang=0,vel=0,drag=false,lx=0;
+  function radius(){return car.offsetWidth/2/Math.tan(Math.PI/N)+30}
+  function layout(){const R=radius();slides.forEach((s,i)=>s.style.transform=`rotateY(${i*step}deg) translateZ(${R}px)`);car.style.transform=`translateZ(${-R}px) rotateY(${ang}deg)`}
+  ring.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;vel=0;ring.setPointerCapture(e.pointerId)});
+  ring.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-lx;lx=e.clientX;ang+=dx*.35;vel=dx*.35;});
+  ring.addEventListener('pointerup',()=>drag=false);ring.addEventListener('pointercancel',()=>drag=false);
+  addEventListener('resize',layout);
+  function loop(){raf=null;if(!rv)return;if(!drag){vel*=.95;ang+=vel+(reduce?0:-.12)}const R=radius();car.style.transform=`translateZ(${-R}px) rotateY(${ang}deg)`;raf=requestAnimationFrame(loop)}
+  layout();
+})();
+
+/* ---------- прогресс, шапка, появление ---------- */
+const prog=document.getElementById('progress');
+addEventListener('scroll',()=>{prog.style.width=(scrollY/(document.body.scrollHeight-innerHeight))*100+'%'},{passive:true});
+(function(){const bt=document.getElementById('burger'),nl=document.getElementById('navlist');
+  const set=o=>{nl.classList.toggle('open',o);bt.setAttribute('aria-expanded',o);bt.textContent=o?'✕':'☰';bt.setAttribute('aria-label',o?'Закрыть меню':'Открыть меню')};
+  bt.onclick=()=>set(!nl.classList.contains('open'));nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>set(false)));
+  addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});})();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%3)*.08+'s';io.observe(el)});
+
+/* ---------- нижняя панель скрыта на первом экране ---------- */
+(function(){const mb=document.getElementById('mbar'),vis=new Set();const o=new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?vis.add(e.target):vis.delete(e.target));mb.classList.toggle('hide',vis.size>0)},{threshold:.2});[document.querySelector('.hero'),document.getElementById('bookForm')].forEach(el=>o.observe(el));})();
+
+/* ---------- открыто сейчас (время Петербурга) ---------- */
+(function(){const el=document.getElementById('live');
+  const h=+new Intl.DateTimeFormat('ru-RU',{hour:'numeric',hour12:false,timeZone:'Europe/Moscow'}).format(new Date());
+  const open=h>=12&&h<23;el.querySelector('span').textContent=open?'Сейчас открыто · до 23:00':'Сейчас закрыто · откроемся в 12:00';
+  if(!open)el.classList.add('closed');})();
+
+/* ---------- курсор ---------- */
+(function(){const c=document.getElementById('cursor');if(touch||reduce)return;
+  let x=0,y=0,cx=0,cy=0,raf=null,first=true;
+  addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;x=e.clientX;y=e.clientY;if(first){cx=x;cy=y;first=false;c.classList.add('live')}if(!raf)raf=requestAnimationFrame(f)});
+  document.querySelectorAll('a,button,.flip,.ring3d').forEach(el=>{el.addEventListener('pointerenter',()=>c.classList.add('big'));el.addEventListener('pointerleave',()=>c.classList.remove('big'))});
+  function f(){raf=null;cx+=(x-cx)*.2;cy+=(y-cy)*.2;c.style.transform=`translate(${cx}px,${cy}px)`;if(Math.abs(x-cx)+Math.abs(y-cy)>.5)raf=requestAnimationFrame(f)}})();
+
+/* ---------- гости: кнопки ---------- */
+document.querySelectorAll('#seg button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#seg button').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.querySelector('input[name=guests]').value=b.textContent});
+
+/* ---------- форма ---------- */
+document.querySelector('input[name=date]').min=new Date().toISOString().slice(0,10);
+document.getElementById('bookForm').onsubmit=e=>{
+  e.preventDefault();const f=new FormData(e.target),ok=document.getElementById('ok');
+  ok.textContent=`Спасибо, ${f.get('name')}! Заявка на ${new Date(f.get('date')).toLocaleDateString('ru-RU')} в ${f.get('time')} принята. Мы перезвоним в течение 15 минут. (Демо: заявка никуда не отправляется.)`;
+  ok.style.display='block';e.target.reset();document.querySelectorAll('#seg button').forEach((x,i)=>x.classList.toggle('on',i===1));
+};
+</script>
+</body>
+</html>
