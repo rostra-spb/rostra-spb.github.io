@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Отель «Шпиль» — бутик-отель у Адмиралтейства, Санкт-Петербург</title>
+<meta name="description" content="Восемнадцать номеров в четырёх минутах от Невского проспекта. Прямое бронирование без комиссии, оплата при заселении.">
+<meta property="og:title" content="Отель «Шпиль» — ключ от тихого Петербурга">
+<meta property="og:description" content="Бутик-отель у Адмиралтейства. Восемнадцать номеров, прямое бронирование.">
+<meta name="theme-color" content="#0E0F14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0E0F14;--ink:#EDE6D8;--gold:#C6A15B;--mist:#8C99AE;--deep:#2A3140;--line:rgba(237,230,216,.16);
+  --serif:"Cormorant Garamond","Times New Roman",Georgia,serif;--sans:Jost,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+.wrap{width:min(1160px,88%);margin:0 auto}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.005em;text-wrap:balance}
+.caps{font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:400;color:var(--mist)}
+.gold{color:var(--gold)}
+section{position:relative;scroll-margin-top:0}
+.link{display:inline-flex;align-items:center;min-height:48px;font-size:12px;letter-spacing:.26em;text-transform:uppercase;font-weight:400;color:var(--ink);border-bottom:1px solid var(--gold);padding:0 2px;background:none;border-top:0;border-left:0;border-right:0;cursor:pointer;transition:color .6s,border-color .6s}
+.link:hover{color:var(--gold)}
+:focus-visible{outline:1px solid var(--gold);outline-offset:4px}
+
+/* процедурный фон вместо пустых мест */
+.proc{position:relative;overflow:hidden;background:
+  radial-gradient(120% 70% at var(--gx,70%) var(--gy,78%),rgba(198,161,91,.20),transparent 60%),
+  radial-gradient(90% 60% at 20% 30%,rgba(124,138,160,.22),transparent 65%),
+  linear-gradient(180deg,#171A22,#0E0F14 70%)}
+.proc::after,.grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;mix-blend-mode:overlay;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.proc .ph{position:absolute;inset:0;background-size:cover;background-position:center}
+.proc .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,15,20,.25),rgba(14,15,20,.72))}
+.room .ph::after{background:linear-gradient(180deg,rgba(14,15,20,.3) 0,rgba(14,15,20,.2) 30%,rgba(14,15,20,.86) 52%,rgba(14,15,20,.95) 100%),linear-gradient(200deg,rgba(14,15,20,.7),transparent 34%)}
+.room .caps{color:rgba(237,230,216,.82)}
+
+/* шапка */
+header{position:absolute;top:0;left:0;right:0;z-index:20;opacity:0;transition:opacity 1.4s}
+.ui header{opacity:1}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:76px}
+.logo{font-size:13px;letter-spacing:.5em;text-transform:uppercase;font-weight:400;display:inline-flex;align-items:center;min-height:48px}
+header nav{display:flex;gap:34px}
+header nav a{font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:400;display:inline-flex;align-items:center;min-height:48px;color:var(--ink);opacity:.85;transition:opacity .6s,color .6s}
+header nav a:hover{opacity:1;color:var(--gold)}
+
+/* первый экран */
+.hero{height:100svh;min-height:600px;overflow:hidden;background:#0B0C11}
+.leaf,.hero canvas,.hero-photo,.veil{position:absolute;inset:0;width:100%;height:100%}
+.defs{position:absolute;width:0;height:0}
+/* две створки: статичная сцена (SVG и CSS), та же игла в тумане */
+.leaf{overflow:hidden}
+.leaf.l{clip-path:inset(0 calc(100% - var(--ax,50%) - .5px) 0 0);transform:translateX(calc(-1*var(--gap,0px)))}
+.leaf.r{clip-path:inset(0 0 0 var(--ax,50%));transform:translateX(var(--gap,0px))}
+.leaf::after{content:"";position:absolute;top:0;bottom:0;width:150px;opacity:var(--eo,0);pointer-events:none}
+.leaf.l::after{left:calc(var(--ax,50%) - 150px);background:linear-gradient(270deg,rgba(236,170,128,.20),transparent)}
+.leaf.r::after{left:var(--ax,50%);background:linear-gradient(90deg,rgba(236,170,128,.20),transparent)}
+.scene{position:absolute;inset:0;background:
+  radial-gradient(70% 22% at 78% var(--hor,60%),rgba(196,118,84,.10),transparent 70%),
+  linear-gradient(180deg,#090A0E 0,#0D0F15 calc(var(--hor,60%) - 34vh),#161922 var(--hor,60%),#0B0C11 calc(var(--hor,60%) + 12vh),#08090C 100%)}
+.ndl{position:absolute;left:calc(var(--ax,50%) - var(--u,90px)*.3);top:var(--tip,20%);width:calc(var(--u,90px)*.6);height:calc(var(--u,90px)*3);overflow:visible}
+.ndl.gold{clip-path:inset(calc((1 - var(--sw,0))*100%) -20px 0 -20px)}
+.ndl.refl{top:calc(var(--yw,60%) + var(--u,90px)*.05);transform:scaleY(-1);filter:blur(1.4px);opacity:calc(var(--sw,0)*.5);
+  -webkit-mask-image:linear-gradient(180deg,transparent 4%,#000 62%);mask-image:linear-gradient(180deg,transparent 4%,#000 62%)}
+.halo{position:absolute;left:calc(var(--ax,50%) - var(--u,90px)*.7);top:calc(var(--tip,20%) + var(--u,90px)*.2);width:calc(var(--u,90px)*1.4);height:calc(var(--u,90px)*2.6);
+  background:radial-gradient(closest-side,rgba(214,168,96,.17),rgba(214,168,96,.05) 55%,transparent);opacity:var(--sw,0)}
+.fogc{position:absolute;left:-10%;right:-10%;top:calc(var(--yw,60%) - var(--u,90px)*1.5);height:calc(var(--u,90px)*2.7);filter:blur(calc(var(--u,90px)*.1));
+  background:
+   radial-gradient(26% 46% at 16% 30%,rgba(52,60,78,.55),transparent 72%),
+   radial-gradient(22% 40% at 88% 36%,rgba(52,60,78,.42),transparent 72%),
+   linear-gradient(180deg,rgba(38,44,58,0) 0,rgba(38,44,58,.99) 27%,rgba(33,38,51,1) 50%,rgba(19,22,31,.95) 72%,rgba(11,12,17,0) 100%);
+  -webkit-mask-image:radial-gradient(60% 130% at calc(var(--ax,50%) + 9%) 46%,#000 30%,rgba(0,0,0,.42) 100%);mask-image:radial-gradient(60% 130% at calc(var(--ax,50%) + 9%) 46%,#000 30%,rgba(0,0,0,.42) 100%)}
+.fogw{position:absolute;left:calc(var(--ax,50%) - var(--u,90px)*1.6);top:calc(var(--yw,60%) - var(--u,90px)*1.25);width:calc(var(--u,90px)*3.2);height:calc(var(--u,90px)*1.5);
+  background:radial-gradient(closest-side,rgba(226,160,98,.15),transparent);opacity:var(--sw,0)}
+.fog{position:absolute;left:-20%;right:-20%;top:calc(var(--yw,60%) - var(--u,90px)*2.1);height:calc(var(--u,90px)*2);filter:blur(26px);opacity:.62;
+  background:radial-gradient(22% 30% at 18% 62%,rgba(140,153,174,.40),transparent 70%),radial-gradient(16% 22% at 40% 44%,rgba(140,153,174,.26),transparent 70%),radial-gradient(26% 34% at 66% 58%,rgba(140,153,174,.36),transparent 70%),radial-gradient(14% 20% at 86% 40%,rgba(140,153,174,.24),transparent 70%);animation:drift 46s ease-in-out infinite alternate}
+.fog.f2{top:calc(var(--yw,60%) - var(--u,90px)*.5);height:calc(var(--u,90px)*1.1);opacity:.3;animation-duration:64s;animation-direction:alternate-reverse}
+@keyframes drift{from{transform:translateX(-4%)}to{transform:translateX(4%)}}
+.hero.away .fog{animation-play-state:paused}
+.opened .leaf{display:none}
+.opened .hero canvas{display:none}
+.hero canvas{display:block;opacity:0;transition:opacity 1.2s}
+.gl-on .hero canvas{opacity:1}
+.gl-on .leaf{visibility:hidden}
+.hero-photo{overflow:hidden;clip-path:inset(0 50% 0 50%);display:none}
+.hero-photo.has{display:block}
+.hp-img{position:absolute;background-size:100% 100%;background-repeat:no-repeat;transform:scale(var(--z,1));transition:transform 3.6s cubic-bezier(.3,0,.12,1);will-change:transform}
+.zoomout .hp-img{transform:scale(var(--zend,1))}
+.veil{pointer-events:none;opacity:0;transition:opacity 2s;background:linear-gradient(180deg,rgba(14,15,20,.55) 0,transparent 20%,transparent 46%,rgba(14,15,20,.78) 80%,rgba(14,15,20,.94) 100%)}
+.ui .veil{opacity:1}
+.edge{position:absolute;top:0;bottom:0;left:var(--ax,50%);width:1px;margin-left:-.5px;pointer-events:none;opacity:var(--eo,0);
+  background:linear-gradient(180deg,transparent 3%,rgba(198,161,91,.8) 20%,#E9CD8E 40%,rgba(198,161,91,.75) 66%,transparent 96%)}
+.edge.l{transform:translateX(calc(-1*var(--gap,0px)))}
+.edge.r{transform:translateX(var(--gap,0px))}
+.hero-txt{position:absolute;left:0;right:0;bottom:118px;z-index:5;opacity:0;transform:translateY(14px);transition:opacity 1.6s ease,transform 1.8s ease}
+.ui .hero-txt{opacity:1;transform:none}
+.hero h1{font-size:clamp(42px,6.2vw,92px);max-width:9.5em;margin:14px 0 0}
+.hero h1 em{font-style:italic}
+.skip{position:absolute;right:6%;bottom:28px;z-index:6;background:none;border:0;cursor:pointer;min-height:48px;padding:0 6px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--mist);transition:opacity .8s}
+.ui .skip{opacity:0;pointer-events:none}
+
+/* подпись */
+.sign{padding:19vh 0}
+.sign .wrap{display:grid;grid-template-columns:1.05fr .8fr;gap:9vw;align-items:center}
+.sign h2{font-size:clamp(38px,5vw,74px)}
+.sign p{margin-top:28px;max-width:25em;color:rgba(237,230,216,.78)}
+.frame{aspect-ratio:3/4;--gx:50%;--gy:64%}
+.frame svg{position:absolute;inset:0;width:100%;height:100%}
+
+/* номера */
+.rooms{padding:4vh 0 12vh}
+.rooms-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:34px}
+.rooms-head h2{font-size:clamp(34px,4.2vw,60px)}
+.arrows{display:flex;gap:6px}
+.arrows button{width:48px;height:48px;background:none;border:0;border-bottom:1px solid var(--line);cursor:pointer;font-family:var(--serif);font-size:24px;color:var(--ink);transition:color .6s,border-color .6s}
+.arrows button:hover{color:var(--gold);border-color:var(--gold)}
+.strip{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 max(6%,calc((100vw - 1160px)/2));scroll-padding:0 max(6%,calc((100vw - 1160px)/2))}
+.strip::-webkit-scrollbar{display:none}
+.room{flex:0 0 min(900px,82vw);height:min(74svh,680px);min-height:460px;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(26px,4.4vw,60px)}
+.room>*{position:relative;z-index:1}
+.room h3{font-size:clamp(34px,4.4vw,64px);margin:10px 0 16px}
+.room p{max-width:24em;color:rgba(237,230,216,.86)}
+.room .price{margin-top:26px;font-family:var(--serif);font-size:clamp(25px,2.7vw,34px);line-height:1}
+.room .price small{font-family:var(--sans);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,230,216,.82);margin-left:12px}
+.room .ph{transition:opacity 1.1s ease}
+.room .ph.hid{opacity:0}
+.room .pick{position:absolute;inset:0;z-index:2}
+.room .pick:focus-visible{outline:1px solid var(--gold);outline-offset:-8px}
+.room .thumbs{position:absolute;z-index:3;top:clamp(14px,2.6vw,36px);right:clamp(14px,2.6vw,36px);display:flex;gap:2px}
+.thumbs button{width:48px;height:48px;padding:5px;background:none;border:0;cursor:pointer}
+.thumbs i{display:block;width:100%;height:100%;background:#171A22 center/cover;border:1px solid rgba(237,230,216,.45);opacity:.78;transition:opacity .6s,border-color .6s}
+.thumbs button:hover i{opacity:1}
+.thumbs button[aria-pressed="true"] i{opacity:1;border-color:var(--gold)}
+.strip{cursor:grab}
+.strip.drag{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.strip.drag .room{pointer-events:none}
+
+/* детали */
+.details{height:min(78svh,660px);min-height:440px;display:flex;align-items:flex-end;margin:2vh 0 16vh}
+.dimg{position:absolute;inset:0}
+.dimg .ph{background-position:56% 50%}
+.dimg .ph::after{background:linear-gradient(180deg,rgba(14,15,20,.66) 0,rgba(14,15,20,.36) 34%,rgba(14,15,20,.62) 64%,rgba(14,15,20,.95) 100%)}
+.dimg::after{opacity:.42}
+.dtxt{position:relative;z-index:1;padding-bottom:clamp(40px,8vh,84px)}
+.dtxt h2{font-size:clamp(34px,4.6vw,66px);max-width:11em;margin-top:18px}
+.dtxt .caps{color:rgba(237,230,216,.86)}
+.hero-photo::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,transparent 30%,rgba(14,15,20,.55) 100%),rgba(14,15,20,.18)}
+/* место */
+.place{padding:6vh 0 18vh}
+.place .wrap{display:grid;grid-template-columns:.8fr 1.05fr;gap:9vw;align-items:center}
+.place h2{font-size:clamp(38px,5vw,74px)}
+.addr{margin-top:22px;color:rgba(237,230,216,.82);font-size:15px}
+.addr span{color:var(--mist)}
+.walk{list-style:none;margin-top:30px;border-top:1px solid var(--line)}
+.walk li{display:flex;justify-content:space-between;gap:20px;padding:15px 0;border-bottom:1px solid var(--line);font-size:15px}
+.walk b{font-weight:400;color:var(--gold);white-space:nowrap}
+.place .link{margin-top:22px}
+.map svg{display:block;width:100%;height:auto;overflow:visible}
+.map text{font-family:var(--sans);font-size:13.5px;font-weight:400;fill:rgba(237,230,216,.88)}
+.map .mn{fill:var(--gold);font-size:12.5px}
+.map .mi{font-family:var(--serif);font-style:italic;font-size:16px;fill:var(--mist)}
+.map .st path{fill:none;stroke:rgba(237,230,216,.24)}
+.map .bl{fill:rgba(237,230,216,.05);stroke:rgba(237,230,216,.34)}
+.map .way{fill:none;stroke:var(--gold);stroke-dasharray:1.5 5;stroke-linecap:round;stroke-width:1.6}
+.map .ht{font-family:var(--serif);font-style:italic;font-size:23px;fill:var(--gold)}
+
+/* отзывы */
+.voices{padding:0 0 17vh}
+.vhead{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.rate{font-size:14px;color:var(--mist)}
+.rate b{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1;color:var(--ink);margin-right:6px}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(30px,5vw,70px);margin-top:46px}
+.vgrid blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(22px,2vw,26px);line-height:1.3}
+.vgrid figcaption{margin-top:18px;font-size:13.5px;color:rgba(237,230,216,.8)}
+.vgrid figcaption span{display:block;margin-top:6px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mist)}
+
+/* бронирование */
+.book{padding:16vh 0 14vh;border-top:1px solid var(--line)}
+.book .wrap{display:grid;grid-template-columns:.85fr 1fr;gap:9vw;align-items:start}
+.book h2{font-size:clamp(40px,5.4vw,80px)}
+.terms{list-style:none;margin-top:38px}
+.terms li{padding:13px 0;border-bottom:1px solid var(--line);font-size:15px;color:rgba(237,230,216,.82)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:26px 30px}
+form>*{min-width:0}
+.fld{display:grid;gap:4px}
+.fld span{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mist);font-weight:400}
+.fld input,.fld select{width:100%;min-width:0;height:48px;background:transparent;border:0;border-bottom:1px solid rgba(237,230,216,.34);border-radius:0;color:var(--ink);font:300 17px var(--sans);padding:0;color-scheme:dark;transition:border-color .6s;-webkit-appearance:none;appearance:none}
+.fld select{background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23C6A15B' stroke-width='1.2'/%3E%3C/svg%3E") no-repeat right 4px center;padding-right:22px;cursor:pointer}
+.fld select option{background:#171A22;color:var(--ink)}
+.fld input:focus,.fld select:focus{outline:none;border-color:var(--gold)}
+.fld input::placeholder{color:rgba(237,230,216,.5)}
+.full{grid-column:1/-1}
+.total{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:20px 0 2px;border-top:1px solid var(--line)}
+.total span{color:var(--mist);font-size:15px}
+.total b{font-family:var(--serif);font-weight:400;font-size:40px;line-height:1}
+.avail{font-size:13px;color:var(--mist);margin-top:-12px}
+.total.empty+.avail{margin-top:0;padding-top:20px;border-top:1px solid var(--line)}
+.after{font-size:13.5px;color:rgba(237,230,216,.78);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 24px;margin-top:-8px}
+.after .link{min-height:48px}
+.agree{display:flex;gap:14px;align-items:flex-start;font-size:13.5px;color:rgba(237,230,216,.78);cursor:pointer;min-height:48px}
+.agree input{flex:none;width:22px;height:22px;margin-top:1px;accent-color:var(--gold)}
+.agree a{padding:13px 0;border:0;text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:4px}
+.send{height:58px;border:1px solid var(--gold);background:transparent;color:var(--ink);font-size:12px;letter-spacing:.3em;text-transform:uppercase;font-weight:400;cursor:pointer;transition:background .7s,color .7s,opacity .7s}
+.send:hover{background:var(--gold);color:#0E0F14}
+.send:disabled{opacity:.4;cursor:default;background:transparent;color:var(--ink)}
+.done{display:none}
+.done.on{display:block}
+.done p{font-family:var(--serif);font-size:26px;line-height:1.25}
+.done small{display:block;margin-top:10px;font-size:13px;color:var(--mist)}
+.owner{margin-top:34px;padding-top:26px;border-top:1px solid var(--line);opacity:0;transform:translateY(10px);transition:opacity 1.4s .5s,transform 1.4s .5s}
+.done.on .owner{opacity:1;transform:none}
+.note{display:flex;gap:14px;align-items:flex-start;margin-top:16px;padding:16px 18px;background:#171A22;border:1px solid var(--line);border-radius:14px;max-width:440px}
+.note i{flex:none;width:36px;height:36px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;font-family:var(--serif);font-style:normal;font-size:18px;color:var(--gold)}
+.note b{display:block;font-weight:500;font-size:14px}
+.note span{display:block;font-size:14.5px;line-height:1.45;color:rgba(237,230,216,.86)}
+.note em{display:block;font-style:normal;font-size:12px;color:var(--mist);margin-top:6px}
+
+footer{padding:9vh 0 150px;border-top:1px solid var(--line)}
+footer .wrap{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:40px}
+footer h4{font-family:var(--sans);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--mist);font-weight:400;margin-bottom:10px}
+footer p,footer a{font-size:15px}
+footer a{display:inline-flex;align-items:center;min-height:48px;border-bottom:1px solid transparent;transition:color .6s}
+footer a:hover{color:var(--gold)}
+footer .demo{grid-column:1/-1;font-size:12.5px;color:var(--mist);padding-top:26px;border-top:1px solid var(--line)}
+footer .demo a{font-size:12.5px;min-height:48px;border-bottom:1px solid var(--gold);color:var(--ink)}
+
+/* нижняя полоса */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(14,15,20,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);transform:translateY(100%);transition:transform 1.3s cubic-bezier(.2,.7,.2,1)}
+.ui .bar{transform:none}
+.bar.off{transform:translateY(100%)}
+.bar .wrap{display:flex;justify-content:space-between;align-items:center;height:68px;gap:16px}
+.bar p{font-size:14px;color:rgba(237,230,216,.86);white-space:nowrap}
+.bar p b{font-family:var(--serif);font-weight:400;font-size:22px;color:var(--ink);margin:0 4px}
+.bar a{display:inline-flex;align-items:center;height:46px;padding:0 26px;border:1px solid var(--gold);font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;font-weight:400;transition:background .7s,color .7s;white-space:nowrap}
+.bar a:hover{background:var(--gold);color:#0E0F14}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity 1.5s ease,transform 1.7s ease}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  header nav a:not(.keep){display:none}
+  .hero-txt{bottom:104px}
+  .hero h1{font-size:clamp(40px,11.6vw,60px)}
+  .skip{right:4%;bottom:20px}
+  .sign{padding:13vh 0}
+  .sign .wrap,.place .wrap,.book .wrap{grid-template-columns:1fr;gap:54px}
+  .frame{aspect-ratio:4/5}
+  .arrows{display:none}
+  .strip{gap:12px;padding:0 6%;scroll-padding:0 6%}
+  .room{flex-basis:84vw;height:68svh;min-height:440px}
+  .room h3{font-size:clamp(40px,12.5vw,64px)}
+  .details{height:68svh;margin:0 0 13vh}
+  .dimg .ph{background-position:60% 50%}
+  .voices{padding:0 0 13vh}
+  .vhead{flex-direction:column;gap:10px}
+  .vgrid{grid-template-columns:1fr;gap:38px;margin-top:36px}
+  .room .thumbs{top:12px;right:12px}
+  .place{padding:2vh 0 13vh}
+  .place .map{order:2}
+  .map text{font-size:16.5px}.map .mn{font-size:15px}.map .mi{font-size:17px}
+  .book{padding:12vh 0 10vh}
+  form{grid-template-columns:1fr 1fr;gap:24px 20px}
+  footer .wrap{grid-template-columns:1fr}
+  .bar p span{display:none}
+  .bar .wrap{width:92%}
+  .bar p{font-size:13px}.bar p b{font-size:19px}
+  .bar a{letter-spacing:.16em;padding:0 14px;font-size:11px}
+  .bar a{padding:0 18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition-duration:.01s!important}
+  .rv{opacity:1;transform:none}
+}
+.hero-txt .caps{color:rgba(237,230,216,.94);text-shadow:0 1px 10px rgba(0,0,0,.9)}
+.total.empty{display:none}
+.vnote{margin-top:34px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mist)}
+.agree input{color-scheme:dark}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#top" class="logo">Шпиль</a>
+    <nav>
+      <a href="#rooms">Номера</a>
+      <a href="#place">Место</a>
+      <a href="#book" class="keep">Бронирование</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero grain" id="top">
+  <svg class="defs" aria-hidden="true"><defs>
+    <linearGradient id="gd" x1="0" x2="1"><stop offset="0" stop-color="#8C6C30"/><stop offset=".3" stop-color="#F1D99E"/><stop offset=".52" stop-color="#C6A15B"/><stop offset="1" stop-color="#4C3A18"/></linearGradient>
+    <g id="ndl">
+      <path d="M28.9 41H31.1L42.2 240H17.8Z"/>
+      <path d="M17.8 240H42.2L46.5 251H13.5Z"/>
+      <rect x="19" y="251" width="22" height="49"/>
+      <circle cx="30" cy="36.8" r="3.5"/>
+      <path d="M29.3 0h1.4v36h-1.4z"/>
+      <path d="M20.8 13.2q9.2 3.6 18.4 0l-2.2 3.4q-7 2-14 0z"/>
+      <path d="M31.3 12.2V0.4L37.6 11.8z"/>
+      <path d="M28.7 12.2V3.4L24 11.8z"/>
+    </g>
+  </defs></svg>
+  <div class="leaf l" aria-hidden="true"></div>
+  <div class="leaf r" aria-hidden="true"></div>
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div class="hero-photo" id="heroPhoto" aria-hidden="true"><div class="hp-img" id="hpImg"></div></div>
+  <div class="veil"></div>
+  <div class="edge l" aria-hidden="true"></div>
+  <div class="edge r" aria-hidden="true"></div>
+  <div class="hero-txt"><div class="wrap">
+    <div class="caps">Бутик-отель · у Адмиралтейства</div>
+    <h1>Ключ от&nbsp;тихого <em>Петербурга.</em></h1>
+  </div></div>
+  <button class="skip" id="skip" type="button">Пропустить</button>
+</section>
+
+<section class="sign" id="sign">
+  <div class="wrap">
+    <div class="rv">
+      <div class="caps">Отель</div>
+      <h2 style="margin-top:18px">Восемнадцать номеров. Один шпиль в&nbsp;окне.</h2>
+      <p>Особняк XIX века в четырёх минутах от Невского. Здесь не бывает очередей у стойки и шума в коридоре.</p>
+    </div>
+    <div class="frame proc rv" id="fDetail">
+      <svg viewBox="0 0 300 400" aria-hidden="true">
+        <rect x="70" y="60" width="160" height="280" fill="none" stroke="#C6A15B" stroke-opacity=".5"/>
+        <path d="M150 60V340M70 200H230" stroke="#C6A15B" stroke-opacity=".28"/>
+        <path d="M187 250L190 250L188.8 132L188.2 132Z" fill="#C6A15B"/><circle cx="188.5" cy="130" r="1.8" fill="#C6A15B"/>
+        <path d="M176 250h25v90h-25z" fill="#C6A15B" fill-opacity=".14"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="rooms" id="rooms">
+  <div class="wrap rooms-head rv">
+    <div><div class="caps">Номера</div><h2 style="margin-top:14px">Пять категорий</h2></div>
+    <div class="arrows"><button type="button" id="prev" aria-label="Предыдущий номер">←</button><button type="button" id="next" aria-label="Следующий номер">→</button></div>
+  </div>
+  <div class="strip" id="strip" tabindex="0" aria-label="Категории номеров, листайте вбок"></div>
+</section>
+
+<section class="details" id="details">
+  <div class="dimg proc" id="fKey" aria-hidden="true"></div>
+  <div class="wrap dtxt rv">
+    <div class="caps">Детали</div>
+    <h2>Вместо карты&nbsp;— настоящий ключ.</h2>
+  </div>
+</section>
+
+<section class="place" id="place">
+  <div class="wrap">
+    <div class="map rv">
+      <svg viewBox="0 0 420 440" role="img" aria-label="Схема: отель «Шпиль» на Малой Морской улице. Рядом Невский проспект, Адмиралтейство и Исаакиевский собор.">
+        <path d="M-12 34C90 70 250 6 432 52" fill="none" stroke="rgba(140,153,174,.20)" stroke-width="30"/>
+        <text class="mi" x="330" y="34">Нева</text>
+        <g class="st">
+          <path d="M224 118L420 196"/><path d="M212 122L262 440"/><path d="M198 120L70 440"/><path d="M286 143L128 330"/>
+        </g>
+        <rect class="bl" x="128" y="98" width="164" height="13"/>
+        <path d="M208.4 100H211.6L210 66Z" fill="#C6A15B"/><circle cx="210" cy="64" r="2" fill="#C6A15B"/>
+        <text x="198" y="88" text-anchor="end">Адмиралтейство</text><text class="mn" x="224" y="88">5 минут</text>
+        <text transform="translate(292 136) rotate(21.7)">Невский проспект</text>
+        <text class="mn" transform="translate(322 174) rotate(21.7)">4 минуты</text>
+        <rect class="bl" x="86" y="318" width="46" height="46"/><circle class="bl" cx="109" cy="341" r="13"/>
+        <text x="8" y="392">Исаакиевский собор</text><text class="mn" x="8" y="413">7 минут</text>
+        <text class="mi" transform="translate(140 292) rotate(-49.8)">Малая Морская</text>
+        <path class="way" d="M128 330L286 143L232 121"/>
+        <circle cx="254" cy="181" r="12" fill="none" stroke="#C6A15B" stroke-opacity=".5"/><circle cx="254" cy="181" r="4.5" fill="#C6A15B"/>
+        <text class="ht" x="274" y="218">Шпиль</text>
+      </svg>
+    </div>
+    <div class="rv">
+      <div class="caps">Место</div>
+      <h2 style="margin-top:18px">Весь парадный Петербург&nbsp;— пешком.</h2>
+      <p class="addr">Санкт-Петербург, Малая Морская улица, 00 <span>· демонстрационный адрес</span></p>
+      <ul class="walk">
+        <li>Невский проспект<b>4 минуты</b></li>
+        <li>Адмиралтейство<b>5 минут</b></li>
+        <li>Исаакиевский собор<b>7 минут</b></li>
+        <li>Эрмитаж<b>12 минут</b></li>
+      </ul>
+      <a class="link" href="https://yandex.ru/maps/" target="_blank" rel="noopener">Открыть в Яндекс Картах</a>
+    </div>
+  </div>
+</section>
+
+<section class="voices" id="voices">
+  <div class="wrap">
+    <div class="vhead rv"><div class="caps">Гости о нас</div></div>
+    <div class="vgrid">
+      <figure class="rv"><blockquote>«Проснулись&nbsp;— и шпиль прямо в окне. Тихо так, будто город ещё спит».</blockquote><figcaption>Анна, Москва</figcaption></figure>
+      <figure class="rv"><blockquote>«Заявку подтвердили за десять минут, заселили без очереди. Ключ настоящий, тяжёлый».</blockquote><figcaption>Михаил, Казань</figcaption></figure>
+      <figure class="rv"><blockquote>«До Эрмитажа дошли пешком. Завтрак у окна&nbsp;— лучшее утро за всю поездку».</blockquote><figcaption>Елена, Екатеринбург</figcaption></figure>
+    </div>
+    <p class="vnote rv">Отзывы приведены для примера</p>
+  </div>
+</section>
+
+<section class="book" id="book">
+  <div class="wrap">
+    <div class="rv">
+      <div class="caps">Бронирование</div>
+      <h2 style="margin-top:18px">Ваш номер ждёт.</h2>
+      <ul class="terms">
+        <li>Лучшая цена — при бронировании напрямую</li>
+        <li>Оплата при заселении: картой или через СБП</li>
+        <li>Бесплатная отмена за 48 часов до заезда</li>
+        <li>Туристический налог оплачивается отдельно</li>
+      </ul>
+    </div>
+    <div class="rv">
+      <form id="bookForm" novalidate>
+        <label class="fld full"><span>Категория</span><select name="cat" id="cat"></select></label>
+        <label class="fld"><span>Заезд</span><input type="date" name="din" lang="ru"></label>
+        <label class="fld"><span>Выезд</span><input type="date" name="dout" lang="ru"></label>
+        <label class="fld"><span>Гости</span><select name="g"></select></label>
+        <label class="fld"><span>Телефон</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00"></label>
+        <label class="fld full"><span>Имя</span><input name="name" autocomplete="name" placeholder="Как к вам обращаться"></label>
+        <div class="total full"><span id="nights">Выберите даты</span><b id="sum">—</b></div>
+        <p class="avail full">Наличие номеров уточняем сразу после заявки</p>
+        <label class="agree full"><input type="checkbox" name="agree"><span>Даю согласие на обработку персональных данных в соответствии с <a href="politika.html">политикой конфиденциальности</a></span></label>
+        <button class="send full" type="submit">Отправить заявку</button>
+        <p class="after full"><span>Подтверждение придёт в Телеграм или по СМС</span><a class="link" href="https://t.me/" target="_blank" rel="noopener">Написать в Телеграм</a></p>
+      </form>
+      <div class="done" id="done" role="status" aria-live="polite">
+        <p id="doneT"></p>
+        <small>Это демонстрация: заявка никуда не отправляется.</small>
+        <div class="owner">
+          <div class="caps gold">Так это видит владелец</div>
+          <div class="note"><i>Ш</i><div><b>Отель «Шпиль» · заявки</b><span id="noteT"></span><em>Пример уведомления в мессенджере · сейчас</em></div></div>
+        </div>
+        <button class="link" type="button" id="again" style="margin-top:26px">Новая заявка</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><h4>Адрес</h4><p>Санкт-Петербург, Малая Морская улица, 00<br><span style="color:var(--mist)">демонстрационный адрес</span></p></div>
+    <div><h4>Связь</h4><a href="tel:+78120000003">+7 (812) 000-00-03</a><br><a href="https://t.me/" target="_blank" rel="noopener">Телеграм</a><br><a href="https://vk.com/" target="_blank" rel="noopener">ВКонтакте</a></div>
+    <div><h4>Стойка регистрации</h4><p>Круглосуточно<br>Заезд с 14:00, выезд до 12:00</p></div>
+    <div class="demo">Отель «Шпиль» — вымышленный отель. Демо-проект студии «Ростра» · <a href="politika.html">Политика конфиденциальности</a></div>
+  </div>
+</footer>
+
+<div class="bar" id="bar"><div class="wrap">
+  <p>Номера от<b>7 500 ₽</b><span class="n">за ночь</span><span> · напрямую, без комиссии</span></p>
+  <a href="#book">Забронировать</a>
+</div></div>
+
+<script>
+/* ============================================================
+   ФОТОГРАФИИ. Положите файлы в папку img/ и впишите пути сюда,
+   например hero:'img/hero.jpg'. Пустая строка = процедурный фон.
+   ============================================================ */
+const PHOTOS={hero:'img/hero-wide.jpg',heroMobile:'img/room5.jpg',rooms:['img/room1.jpg','img/room2.jpg','img/room3.jpg','img/room4.jpg','img/room5.jpg'],detail:'img/detail.jpg',bath:'img/bath.jpg',view:'img/view.jpg',breakfast:'img/breakfast.jpg',key:'img/key.jpg'};
+/* Где на главном фото шпиль: размер файла, ось (доля ширины), верх кораблика и основание иглы (доли высоты),
+   want — где ось должна оказаться на экране. Игла первого экрана встаёт точно на это место. */
+const HERO_META={
+ 'img/hero-wide.jpg':{w:1600,h:900,ax:.6675,tip:.171,base:.458,want:.675},
+ 'img/room5.jpg':{w:1086,h:1448,ax:.6667,tip:.2659,base:.3867,want:.64}};
+const VIEWS={detail:'Деталь интерьера',bath:'Ванная',breakfast:'Завтрак у окна',view:'Вид из окна'};
+
+const ROOMS=[
+ {name:'Студия',m:16,cap:2,price:7500,line:'Окно во двор и полная тишина.',gx:'24%',gy:'82%',views:['detail','breakfast']},
+ {name:'Классик',m:22,cap:2,price:9500,line:'Высокие потолки и дубовый паркет.',gx:'72%',gy:'78%',views:['bath','detail']},
+ {name:'Мансарда',m:26,cap:3,price:12000,line:'Под самой крышей, с окном в небо.',gx:'50%',gy:'18%',views:['breakfast','bath']},
+ {name:'Панорама',m:32,cap:3,price:14000,line:'Крыши и купола — во всё окно.',gx:'80%',gy:'60%',views:['view','bath']},
+ {name:'Люкс с видом на шпиль',m:48,cap:4,price:22000,line:'Шпиль Адмиралтейства виден прямо из постели.',gx:'60%',gy:'70%',views:['view','breakfast']}
+];
+const fmt=n=>n.toLocaleString('ru-RU').replace(/\s/g,'\u00A0')+'\u00A0₽';
+const guestsW=n=>n===1?'гостя':'гостей';
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const root=document.documentElement,hero=document.getElementById('top');
+
+/* ---------- фото или процедурный фон ---------- */
+const lazy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.style.backgroundImage='url("'+e.target.dataset.src+'")';lazy.unobserve(e.target)}}),{rootMargin:'600px'});
+function photo(el,src){if(!src||!el)return;const d=document.createElement('div');d.className='ph';d.dataset.src=src;lazy.observe(d);el.prepend(d);const s=el.querySelector('svg');if(s)s.style.display='none'}
+photo(document.getElementById('fDetail'),PHOTOS.detail);
+photo(document.getElementById('fKey'),PHOTOS.key);
+const heroPhoto=document.getElementById('heroPhoto'),hpImg=document.getElementById('hpImg');
+const HERO=(innerWidth<=900&&PHOTOS.heroMobile)?PHOTOS.heroMobile:PHOTOS.hero;
+const HM=HERO_META[HERO]||{w:16,h:9,ax:.62,tip:.18,base:.46,want:.62};
+if(HERO){hpImg.style.backgroundImage='url("'+HERO+'")';heroPhoto.classList.add('has')}
+const OPEN_MAX=HERO?1:0;
+
+/* ---------- номера ---------- */
+const strip=document.getElementById('strip');
+strip.innerHTML=ROOMS.map((r,i)=>{
+ const vs=[[PHOTOS.rooms[i],'Номер'],...r.views.map(k=>[PHOTOS[k],VIEWS[k]])].filter(v=>v[0]);
+ return `<article class="room proc" style="--gx:${r.gx};--gy:${r.gy}">
+  <a class="pick" href="#book" data-room="${i}" aria-label="${r.name}, ${fmt(r.price)} за ночь. Перейти к бронированию"></a>
+  <div class="caps">${r.m} м² · до ${r.cap} ${guestsW(r.cap)} · завтрак включён</div>
+  <h3>${r.name}</h3>
+  <p>${r.line}</p>
+  <div class="price">${fmt(r.price)}<small>за ночь</small></div>
+</article>`}).join('');
+[...strip.children].forEach((el,i)=>{photo(el,PHOTOS.rooms[i]);const ph=el.querySelector('.ph');if(ph){ph.dataset.k=0;if(i===0)ph.style.filter='brightness(1.32) contrast(.96)'}});
+strip.querySelectorAll('.thumbs i').forEach(t=>lazy.observe(t));
+const RPOS=[innerWidth<=900?'74% 60%':'34% 60%','42% 50%','72% 35%','66% 45%','60% 45%'];[...strip.children].forEach((el,i)=>{const ph=el.querySelector('.ph');if(ph)ph.style.backgroundPosition=RPOS[i]});
+function showView(b){const card=b.closest('.room'),k=b.dataset.k;
+ let ph=card.querySelector('.ph[data-k="'+k+'"]');
+ if(!ph){ph=document.createElement('div');ph.className='ph hid';ph.dataset.k=k;ph.style.backgroundImage='url("'+b.dataset.full+'")';card.querySelector('.ph').after(ph);ph.offsetWidth}
+ card.querySelectorAll('.ph').forEach(p=>p.classList.toggle('hid',p!==ph));
+ card.querySelectorAll('.thumbs button').forEach(x=>x.setAttribute('aria-pressed',x===b))}
+const stepW=()=>strip.children[1]?strip.children[1].offsetLeft-strip.children[0].offsetLeft:strip.clientWidth;
+document.getElementById('next').onclick=()=>strip.scrollBy({left:stepW(),behavior:reduce?'auto':'smooth'});
+document.getElementById('prev').onclick=()=>strip.scrollBy({left:-stepW(),behavior:reduce?'auto':'smooth'});
+/* мышью ленту можно тянуть */
+let dg=null,dragEnd=0;
+strip.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button===0)dg={x:e.clientX,s:strip.scrollLeft,m:false}});
+addEventListener('pointermove',e=>{if(!dg)return;const dx=e.clientX-dg.x;
+ if(!dg.m&&Math.abs(dx)>6){dg.m=true;strip.classList.add('drag')}
+ if(dg.m){dg.d=dx;strip.scrollLeft=dg.s-dx}});
+function dragStop(){if(!dg)return;const m=dg.m,dx=dg.d||0;dg=null;if(!m)return;dragEnd=performance.now();
+ const w=stepW(),x=strip.scrollLeft/w,i=dx<-60?Math.ceil(x):dx>60?Math.floor(x):Math.round(x);strip.scrollTo({left:i*w,behavior:reduce?'auto':'smooth'});
+ setTimeout(()=>strip.classList.remove('drag'),reduce?0:500)}
+addEventListener('pointerup',dragStop);addEventListener('pointercancel',dragStop);
+strip.addEventListener('dragstart',e=>e.preventDefault());
+strip.addEventListener('click',e=>{if(performance.now()-dragEnd<120){e.preventDefault();e.stopPropagation()}},true);
+
+/* ---------- бронирование ---------- */
+const form=document.getElementById('bookForm'),cat=document.getElementById('cat'),done=document.getElementById('done'),btn=form.querySelector('.send');
+cat.innerHTML=ROOMS.map((r,i)=>`<option value="${i}">${r.name} — ${fmt(r.price)}</option>`).join('');cat.value='1';
+function setCap(){const g=form.g,r=ROOMS[+cat.value],old=+g.value||2;g.innerHTML=Array.from({length:r.cap},(_,i)=>`<option${i+1===Math.min(old,r.cap)?' selected':''}>${i+1}</option>`).join('')}
+setCap();
+const today=new Date().toLocaleDateString('sv');form.din.min=today;form.dout.min=today;
+const addD=(d,k)=>{const x=new Date(d+'T12:00');x.setDate(x.getDate()+k);return x.toLocaleDateString('sv')};
+form.din.addEventListener('change',()=>{form.dout.min=form.din.value||today;form.dout.max=form.din.value?addD(form.din.value,30):''});
+const nightsN=(a,b)=>Math.round((Date.parse(b)-Date.parse(a))/864e5);
+const plural=n=>n%10===1&&n%100!==11?'ночь':(n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)?'ночи':'ночей');
+function calc(){const n=nightsN(form.din.value,form.dout.value),r=ROOMS[+cat.value];
+ if(n>0&&form.din.value>=today){document.getElementById('nights').textContent=`${n}\u00A0${plural(n)} · «${r.name}»`;document.getElementById('sum').textContent=fmt(n*r.price);document.querySelector('.total').classList.remove('empty')}
+ else{document.querySelector('.total').classList.add('empty');document.getElementById('nights').textContent='Выберите даты';document.getElementById('sum').textContent='—'}}
+calc();
+cat.addEventListener('change',()=>{setCap();calc()});
+form.addEventListener('input',e=>{calc();if(e.target.setCustomValidity)e.target.setCustomValidity('')});
+function validate(){const f=form,set=(el,m)=>el.setCustomValidity(m);
+ set(f.din,!f.din.value?'Выберите дату заезда':(f.din.value<today?'Дата заезда уже прошла':''));
+ set(f.dout,!f.dout.value?'Выберите дату выезда':(f.din.value&&nightsN(f.din.value,f.dout.value)<1?'Дата выезда должна быть позже заезда':''));
+ set(f.phone,!f.phone.value.trim()?'Укажите телефон, например +7 900 000-00-00':(f.phone.value.replace(/\D/g,'').length>=10?'':'Проверьте номер: не меньше 10 цифр'));
+ set(f.name,f.name.value.trim()?'':'Укажите, как к вам обращаться');
+ if(f.din.value&&f.dout.value&&nightsN(f.din.value,f.dout.value)>30)set(f.dout,'Онлайн бронируем до 30 ночей. Для долгого проживания позвоните нам');
+ set(f.agree,f.agree.checked?'':'Нужно согласие на обработку персональных данных');
+ return f.checkValidity()}
+let sent=false;
+form.addEventListener('submit',e=>{e.preventDefault();if(sent)return;
+ if(!validate()){form.reportValidity();return}
+ sent=true;btn.disabled=true;
+ const nb=x=>x.replace(/ /g,'\u00A0').replace(/-/g,'\u2011'),g=+form.g.value,gw=g===1?'гость':'гостя';const n=nightsN(form.din.value,form.dout.value),r=ROOMS[+cat.value],sum=fmt(n*r.price),dd=x=>new Date(x+'T12:00').toLocaleDateString('ru-RU',{day:'numeric',month:'long'}),per=`${dd(form.din.value)} — ${dd(form.dout.value)}`;
+ document.getElementById('doneT').textContent=`Спасибо, ${form.name.value.trim()}. Заявка принята: «${r.name}», ${per}, ${n}\u00A0${plural(n)}, ${g}\u00A0${gw}, ${sum}. Подтверждение придёт в Телеграм или по СМС в течение 15 минут.`;
+ document.getElementById('noteT').textContent=`Новая бронь: ${r.name}, ${per}, ${n}\u00A0${plural(n)}, ${g}\u00A0${gw}, ${sum} · ${form.name.value.trim()}, ${nb(form.phone.value.trim())} — без комиссии агрегатора`;
+ form.style.display='none';done.classList.add('on');done.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'})});
+document.getElementById('again').onclick=()=>{form.reset();cat.value='1';setCap();calc();form.dout.min=today;form.dout.max='';sent=false;btn.disabled=false;done.classList.remove('on');form.style.display=''};
+strip.addEventListener('click',e=>{const t=e.target.closest('.thumbs button');if(t){showView(t);return}
+ const b=e.target.closest('[data-room]');if(!b)return;e.preventDefault();
+ if(sent)document.getElementById('again').click();
+ cat.value=b.dataset.room;setCap();calc();document.getElementById('book').scrollIntoView({behavior:reduce?'auto':'smooth'})});
+
+/* ---------- появление и нижняя полоса ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>el.classList.add('in')),6000); /* содержание не зависит от анимации */
+const bar=document.getElementById('bar'),hide=new Set();
+const io2=new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?hide.add(e.target):hide.delete(e.target));bar.classList.toggle('off',hide.size>0)},{threshold:.18});
+io2.observe(document.getElementById('book'));io2.observe(document.querySelector('footer'));
+
+/* ============================================================
+   ПЕРВЫЙ ЭКРАН: золотая игла в тумане над водой.
+   Игла стоит ровно там, где шпиль на фотографии; две створки
+   расходятся от её оси, и в просвете оказывается тот же шпиль.
+   Три уровня: 1 и 2 — шейдер, 3 — статичная сцена (SVG и CSS).
+   ============================================================ */
+const S={sweep:0,open:0};
+const q=new URLSearchParams(location.search);
+let tier=+q.get('tier')||0;const forced=tier>0;
+const cv=document.getElementById('gl');let gl=null,U={},prog=null;
+const ease=x=>x<0?0:x>1?1:x*x*(3-2*x),seg=(t,a,b)=>ease((t-a)/(b-a));
+
+/* ---------- раскладка: где шпиль на экране ---------- */
+const SCENE='<div class="scene"><div class="halo"></div>'+
+ '<svg class="ndl refl" viewBox="0 0 60 300"><use href="#ndl" fill="url(#gd)"/></svg>'+
+ '<svg class="ndl" viewBox="0 0 60 300"><use href="#ndl" fill="#1E212A"/></svg>'+
+ '<svg class="ndl gold" viewBox="0 0 60 300"><use href="#ndl" fill="url(#gd)"/></svg>'+
+ '<div class="fogc"></div><div class="fogw"></div><div class="fog"></div><div class="fog f2"></div></div>';
+hero.querySelectorAll('.leaf').forEach(l=>l.innerHTML=SCENE);
+const LAY={};
+const WT=3.05,WB=.65,CY=.25,FOC=1.62;   /* мир шейдера: верх и основание иглы, высота камеры, фокус */
+function layout(){const W=hero.clientWidth,H=hero.clientHeight;let ax,tip,base,Z=1;
+ if(HERO){const k=Math.max(W/HM.w,H/HM.h),iw=HM.w*k,ih=HM.h*k;
+  const left=-Math.min(Math.max(HM.ax*iw-HM.want*W,0),iw-W),top=-(ih-H)*.4;
+  hpImg.style.width=iw+'px';hpImg.style.height=ih+'px';hpImg.style.left=left+'px';hpImg.style.top=top+'px';
+  let lf=left+Math.round(left+HM.ax*iw)-(left+HM.ax*iw);hpImg.style.left=lf+'px';
+  ax=lf+HM.ax*iw;tip=top+HM.tip*ih;base=top+HM.base*ih;
+  const n=base-tip,mid=(tip+base)/2;
+  Z=Math.max(1,Math.min(2,Math.max(1.08,.25*H/n),(mid-.12*H)/(n/2)));
+  hpImg.style.transformOrigin=(ax-lf)+'px '+(mid-top)+'px';
+  tip=mid-n/2*Z;base=mid+n/2*Z;
+ }else{ax=Math.round(W*(W>900?.62:.5));tip=.17*H;base=.47*H}
+ const u=(base-tip)/(WT-WB),yw=base+WB*u;
+ Object.assign(LAY,{W,H,ax,tip,base,u,yw,hor:yw-CY*u,Z,gmax:Math.max(ax,W-ax)+2});
+ const st=hero.style;st.setProperty('--ax',ax+'px');st.setProperty('--tip',tip+'px');st.setProperty('--u',u+'px');
+ st.setProperty('--yw',yw+'px');st.setProperty('--hor',LAY.hor+'px');st.setProperty('--z',Z);st.setProperty('--zend',W<900?Math.max(1,(1+(Z-1)*.6)).toFixed(3):1)}
+layout();window.__lay=LAY;
+
+function drawCommon(){const g=S.open*LAY.gmax,st=hero.style;
+ st.setProperty('--gap',g+'px');st.setProperty('--sw',S.sweep);
+ st.setProperty('--eo',Math.min(1,S.open*12)*(1-seg(S.open,.7,1)));
+ if(HERO){heroPhoto.style.clipPath=`inset(0 ${Math.max(0,LAY.W-LAY.ax-g)}px 0 ${Math.max(0,LAY.ax-g)}px)`;
+  if(S.open>.3)root.classList.add('zoomout')}}
+
+const VS='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+const FS=`precision highp float;
+uniform vec2 uRes;uniform float uT,uSweep,uOpen,uSteps,uMist,uRip,uDist,uAx,uHy,uGap;uniform vec2 uL,uRc;
+const vec3 GOLD=vec3(1.,.72,.31);const float F=1.62,CY=.25;
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<3;i++){v+=a*noise(p);p=p*2.03+7.1;a*=.5;}return v;}
+float cyl(vec3 p,float r,float y0,float y1){return max(length(p.xz)-r,max(y0-p.y,p.y-y1));}
+float cone(vec3 p,float y0,float y1,float r0,float r1){float h=clamp((p.y-y0)/(y1-y0),0.,1.);return max((length(p.xz)-mix(r0,r1,h))*.97,max(y0-p.y,p.y-y1));}
+float ell(vec3 p,vec3 r){float k0=length(p/r),k1=length(p/(r*r));return k0*(k0-1.)/k1;}
+float tri(vec2 p,vec2 a,vec2 b,vec2 c){vec2 e0=b-a,e1=c-b,e2=a-c,v0=p-a,v1=p-b,v2=p-c;
+ vec2 p0=v0-e0*clamp(dot(v0,e0)/dot(e0,e0),0.,1.),p1=v1-e1*clamp(dot(v1,e1)/dot(e1,e1),0.,1.),p2=v2-e2*clamp(dot(v2,e2)/dot(e2,e2),0.,1.);
+ float s=sign(e0.x*e2.y-e0.y*e2.x);
+ vec2 d=min(min(vec2(dot(p0,p0),s*(v0.x*e0.y-v0.y*e0.x)),vec2(dot(p1,p1),s*(v1.x*e1.y-v1.y*e1.x))),vec2(dot(p2,p2),s*(v2.x*e2.y-v2.y*e2.x)));
+ return -sqrt(d.x)*sign(d.y);}
+/* только игла: конус, яблоко, шток и кораблик. Основание уходит в туман */
+float geo(vec3 p){
+ float d=cone(p,.65,2.65,.122,.013);
+ d=min(d,cone(p,.54,.65,.165,.122));
+ d=min(d,cyl(p,.11,.0,.54));
+ d=min(d,length(p-vec3(0.,2.685,0.))-.036);
+ d=min(d,cyl(p,.009,2.68,3.05));
+ if(p.y>2.8){
+  d=min(d,ell(p-vec3(0.,2.905,0.),vec3(.092,.017,.012)));
+  float s=min(tri(p.xy,vec2(.012,2.928),vec2(.012,3.05),vec2(.078,2.932)),tri(p.xy,vec2(-.012,2.928),vec2(-.012,3.018),vec2(-.06,2.932)));
+  d=min(d,max(s,abs(p.z)-.004));}
+ return d;}
+vec3 nrm(vec3 p){vec2 e=vec2(.0012,-.0012);return normalize(e.xyy*geo(p+e.xyy)+e.yyx*geo(p+e.yyx)+e.yxy*geo(p+e.yxy)+e.xxx*geo(p+e.xxx));}
+vec3 Lk(){return normalize(vec3(-.50+uL.x*.9,.07+uL.y*.4,.86));}
+vec3 env(vec3 d){float y=d.y;
+ vec3 c=mix(vec3(.16,.17,.21),vec3(.03,.035,.055),smoothstep(0.,.8,y))*.5;
+ c+=vec3(1.,.58,.30)*exp(-pow((y-.03)*3.2,2.))*(.035+.50*smoothstep(.55,-.85,d.x));
+ if(y<0.)c=mix(vec3(.012,.014,.02),c*.5,exp(y*4.));
+ c+=vec3(1.,.86,.62)*pow(max(dot(d,Lk()),0.),150.)*2.4;
+ return c;}
+float lit(float y){return smoothstep(.5,-.4,y-uSweep*4.3);}
+vec3 shade(vec3 p,vec3 rd){vec3 n=nrm(p),r=reflect(rd,n);
+ float fr=pow(1.-max(dot(n,-rd),0.),5.);vec3 Fr=GOLD+(1.-GOLD)*fr;
+ vec3 c=Fr*(env(r)*.8+env(n)*.3);
+ c*=1.-.05*step(p.y,2.66)*(.5+.5*sin(p.y*70.));
+ float front=exp(-pow((p.y-uSweep*4.3+.35)*2.2,2.))*step(.005,uSweep)*step(uSweep,.995);
+ c+=GOLD*front*.18;
+ c*=mix(.11,1.,lit(p.y));
+ return c;}
+vec4 needle(vec3 ro,vec3 rd){
+ float k=dot(rd.xz,rd.xz);float ts=-dot(ro.xz,rd.xz)/max(k,1e-5);vec2 c=ro.xz+rd.xz*ts;
+ if(ts<0.||dot(c,c)>.06)return vec4(0.);
+ float t=ts-.5,md=1e3,mt=t,hit=0.;
+ for(int i=0;i<44;i++){if(float(i)>=uSteps)break;float d=geo(ro+rd*t);float r=d/t;if(r<md){md=r;mt=t;}
+  if(d<.0005*t){hit=1.;break;}t+=d*.9;if(t>ts+.5)break;}
+ float px=1.5/(F*uRes.y);float a=hit>.5?1.:clamp(1.-md/px,0.,1.);
+ if(a<=0.)return vec4(0.);
+ vec3 p=ro+rd*(hit>.5?t:mt);
+ return vec4(shade(p,rd),a);}
+float fogN(vec2 q){float n=fbm(vec2(q.x*.42+uT*.022,q.y*1.3));
+ if(uMist>.5)n=n*.72+fbm(vec2(q.x*1.25-uT*.035,q.y*2.4+3.))*.28;return n;}
+float fogA(vec2 q,float n){float top=1.0+(n-.5)*1.5;return smoothstep(top+.75,top-.12,q.y);}
+vec3 fogC(vec2 q,float n){
+ vec3 c=vec3(.040,.045,.060)*(.45+1.15*n)*(.55+.45*smoothstep(-1.2,.9,q.y));
+ c+=vec3(.95,.56,.28)*.040*exp(-q.x*q.x*.55)*lit(.9)*smoothstep(-.9,1.,q.y);
+ c+=vec3(.75,.34,.28)*.010*smoothstep(-3.,7.,q.x);
+ return c;}
+vec3 back(vec2 q){return mix(vec3(.026,.029,.040),vec3(.0105,.0115,.017),smoothstep(.4,4.,q.y));}
+vec3 view(vec3 ro,vec3 rd){
+ vec2 q=ro.xy+rd.xy*(ro.z/max(-rd.z,1e-3));
+ vec3 c=back(q);
+ vec4 o=needle(ro,rd);c=mix(c,o.rgb,o.a);
+ c+=GOLD*.020*exp(-abs(q.x)*5.5)*smoothstep(.7,1.4,q.y)*smoothstep(3.3,2.3,q.y)*lit(q.y);
+ float n=fogN(q);
+ return mix(c,fogC(q,n),fogA(q,n));}
+void main(){
+ vec2 fc=gl_FragCoord.xy;float dx=fc.x-uAx;fc.x-=(dx<0.?-1.:1.)*uGap;
+ vec2 uv=(fc-vec2(uAx,uHy))/uRes.y;
+ vec3 ro=vec3(0.,CY,uDist),rd=normalize(vec3(uv,-F));
+ vec3 col;
+ if(uv.y<0.){
+  vec2 q0=vec2(uv.x,uv.y)*uDist/F+vec2(0.,CY);
+  float dp=smoothstep(.2,-3.5,q0.y);
+  float ox=(fbm(vec2(q0.x*2.6+uT*.06,q0.y*26.-uT*.4))-.5)*(.02+.15*dp);
+  float oy=(fbm(vec2(q0.x*1.6-uT*.05,q0.y*11.+uT*.21)+5.3)-.5)*(.1+.6*dp);
+  float dr=length(vec2(q0.x-uRc.x,(q0.y+1.6)*2.2));ox+=sin(dr*8.-uT*5.)*exp(-dr*1.1)*uRip*.1;
+  vec3 r0=vec3(0.,-CY,uDist);
+  vec3 rm=normalize(vec3(q0.x+ox,max(-q0.y+oy,-.2)+CY,-uDist));
+  vec3 rc=view(r0,rm);
+  float fr=.16+.84*pow(1.-clamp(-rd.y*2.6,0.,1.),2.);
+  col=mix(vec3(.0075,.0085,.012),rc*.8,fr);
+ }else{col=view(ro,rd);}
+ float hz=uv.y*uDist/F,hx=uv.x*uDist/F;col=mix(col,fogC(vec2(hx,.2),fogN(vec2(hx,.2))),.7*exp(-hz*hz*5.));
+ float e=abs(dx)-uGap;
+ col+=vec3(.95,.55,.42)*.05*smoothstep(0.,.12,uOpen)*(1.-smoothstep(.75,1.,uOpen))*exp(-max(e,0.)/(.085*uRes.y));
+ vec2 v=gl_FragCoord.xy/uRes-.5;col*=1.-dot(v,v)*.7;
+ col=(col*(2.51*col+.03))/(col*(2.43*col+.59)+.14);
+ col=pow(clamp(col,0.,1.),vec3(.4545));
+ col+=(hash(gl_FragCoord.xy+uT*31.)-.5)*.024;
+ gl_FragColor=vec4(col,1.);}`;
+
+function initGL(){try{
+ gl=cv.getContext('webgl',{antialias:false,alpha:false,powerPreference:'high-performance'});if(!gl)return false;
+ const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);if(!gl.getShaderParameter(o,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(o));return o};
+ prog=gl.createProgram();gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(prog);
+ if(!gl.getProgramParameter(prog,gl.LINK_STATUS))return false;gl.useProgram(prog);
+ gl.bindBuffer(gl.ARRAY_BUFFER,gl.createBuffer());gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+ const l=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(l);gl.vertexAttribPointer(l,2,gl.FLOAT,false,0,0);
+ ['uRes','uT','uSweep','uOpen','uSteps','uMist','uRip','uDist','uAx','uHy','uGap','uL','uRc'].forEach(n=>U[n]=gl.getUniformLocation(prog,n));
+ cv.addEventListener('webglcontextlost',e=>{e.preventDefault();if(!opened)setTier(3)});
+ return true}catch(e){window.__glerr=String(e);return false}}
+function sizeGL(){if(!gl)return;const d=Math.min(devicePixelRatio||1,1.5),k=tier===1?1:.6;
+ let w=hero.clientWidth*d*k,h=hero.clientHeight*d*k;const MAX=tier===1?1500000:480000;if(w*h>MAX){const s=Math.sqrt(MAX/(w*h));w*=s;h*=s}
+ cv.width=Math.max(2,Math.round(w));cv.height=Math.max(2,Math.round(h));gl.viewport(0,0,cv.width,cv.height)}
+const L={x:0,y:0,tx:0,ty:0},RC={x:0};let rip=0,T=0,frames=0,opened=false;
+function drawGL(){const k=cv.height/LAY.H;
+ gl.uniform2f(U.uRes,cv.width,cv.height);gl.uniform1f(U.uT,T);gl.uniform1f(U.uSweep,S.sweep);gl.uniform1f(U.uOpen,S.open);
+ gl.uniform1f(U.uSteps,tier===1?44:26);gl.uniform1f(U.uMist,tier===1?1:0);gl.uniform1f(U.uRip,rip);
+ gl.uniform1f(U.uDist,FOC*(WT-WB)*LAY.H/(LAY.base-LAY.tip));
+ gl.uniform1f(U.uAx,LAY.ax*cv.width/LAY.W);gl.uniform1f(U.uHy,(LAY.H-LAY.hor)*k);gl.uniform1f(U.uGap,S.open*LAY.gmax*cv.width/LAY.W);
+ gl.uniform2f(U.uL,L.x,L.y);gl.uniform2f(U.uRc,RC.x,0);
+ gl.drawArrays(gl.TRIANGLE_STRIP,0,4);frames++;if(frames===1)root.classList.add('gl-on')}
+function setTier(t){tier=t;root.dataset.tier=t;
+ if(t===3){root.classList.remove('gl-on');cv.style.display='none'}else{sizeGL()}}
+function draw(){drawCommon();if(tier!==3&&!opened)drawGL()}
+
+/* ---------- выбор уровня ---------- */
+if(reduce&&!forced)tier=3;
+if(tier!==3){if(!initGL())tier=3;else if(!tier)tier=1}
+setTier(tier);
+
+/* ---------- сценарий: свет поднимается по игле, створки расходятся ---------- */
+function state(t){S.sweep=seg(t,.7,2.5);S.open=seg(t,2.8,4.6)*OPEN_MAX}
+let raf=0,t0=0,last=0,intro=true,slow=0,cnt=0;
+function uiOn(){root.classList.add('ui')}
+function finish(){intro=false;state(9);drawCommon();uiOn();
+ if(HERO){opened=true;root.classList.add('opened')}else draw();   /* фото закрыло сцену: рендер больше не нужен */
+ try{sessionStorage.setItem('shpil-intro','1')}catch(e){}}
+function tick(now){raf=0;
+ if(!t0){t0=now;last=now}
+ const dt=Math.min((now-last)/1000,.2);last=now;T+=dt;
+ if(intro){
+  const t=(now-t0)/1000;state(t);
+  if(tier!==3&&!forced){cnt++;if(cnt>3){if(dt>.05)slow++;else slow=Math.max(0,slow-1);if(slow>=4){slow=0;cnt=0;setTier(tier+1)}}}
+  draw();if(t>=4.1)uiOn();
+  if(t>=4.65){finish();return}
+  raf=requestAnimationFrame(tick);return}
+ if(opened)return;
+ /* без фотографии сцена остаётся: рисуем только пока есть движение */
+ L.x+=(L.tx-L.x)*Math.min(1,dt*4);L.y+=(L.ty-L.y)*Math.min(1,dt*4);rip*=Math.exp(-dt*1.6);
+ if(tier!==3&&!forced&&dt>.07){slow++;if(slow>=6){slow=0;setTier(tier+1)}}
+ draw();
+ if(Math.abs(L.tx-L.x)+Math.abs(L.ty-L.y)>.004||rip>.02)raf=requestAnimationFrame(tick);else{rip=0}}
+function kick(){if(!raf&&!document.hidden&&!opened)raf=requestAnimationFrame(now=>{last=now;tick(now)})}
+
+let seen=false;try{seen=sessionStorage.getItem('shpil-intro')==='1'}catch(e){}
+if(q.has('intro'))seen=false;
+if(q.has('at')){intro=false;hpImg.style.transition='none';state(+q.get('at'));draw();if(+q.get('at')>=4.1)uiOn()}   /* служебно: кадр сценария */
+else if(seen||(reduce&&!forced)){hpImg.style.transition='none';finish()}
+else{draw();raf=requestAnimationFrame(tick)}
+
+function skip(){if(!intro)return;if(raf){cancelAnimationFrame(raf);raf=0}finish()}
+document.getElementById('skip').onclick=skip;
+addEventListener('scroll',()=>{if(scrollY>30)skip()},{passive:true});
+addEventListener('keydown',e=>{if(e.key==='Escape'||e.key==='Enter')skip()});
+hero.addEventListener('pointerdown',e=>{if(intro&&!e.target.closest('a,button'))skip()});
+
+/* вне экрана туман не движется; без фотографии свет следует за указателем */
+let heroVis=true;new IntersectionObserver(([e])=>{heroVis=e.isIntersecting;hero.classList.toggle('away',!heroVis)}).observe(hero);
+hero.addEventListener('pointermove',e=>{if(intro||opened||tier===3||!heroVis)return;
+ const b=hero.getBoundingClientRect();L.tx=((e.clientX-b.left)/b.width-.5)*2;L.ty=-((e.clientY-b.top)/b.height-.5)*2;
+ RC.x=L.tx*3;rip=Math.max(rip,.9);kick()},{passive:true});
+let rz=0;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{layout();if(tier!==3&&!opened)sizeGL();if(!intro)draw()},150)});
+</script>
+</body>
+</html>
